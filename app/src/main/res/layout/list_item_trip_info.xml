@@ -1,0 +1,74 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="#333F50">
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@color/theme_dark"
+            android:src="@drawable/top_icon" />
+
+        <TextView
+            android:id="@+id/list_item_trip_route_no"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="CA-2"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#BBBBBB" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" 
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="13dp">
+
+        <TextView
+            android:id="@+id/list_item_trip_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#333F50"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" 
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="5dp">
+
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="49dp"
+                android:layout_gravity="bottom"
+                android:src="@drawable/list_item_trips_img" />
+
+            <TextView
+                android:id="@+id/list_item_trip_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="7dp"
+                android:layout_gravity="center_vertical"
+                android:text="06:45   Mayur Vihar\n07:55   Vasant Kunj"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="#A6A6A6"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

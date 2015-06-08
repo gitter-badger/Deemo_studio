@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.sevenre.trackre.driver"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="16"
+        android:targetSdkVersion="19" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+
+    <permission
+        android:name="com.sevenre.trackre.driver.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.WRITE_SMS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".ActivityHome"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ActivityLogin"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityAuthenticate"
+            android:noHistory="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityPickUpList"
+            android:noHistory="true"
+            android:parentActivityName=".ActivityHome"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityDropList"
+            android:noHistory="true"
+            android:parentActivityName=".ActivityHome"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:parentActivityName=".ActivityHome"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityTagging"
+            android:label="@string/activity_tagging"
+            android:parentActivityName=".ActivityHome"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".qrcode.CaptureActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:icon="@drawable/icon"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".ActivityOtherInfo"
+            android:label="Other Info"
+            android:parentActivityName=".ActivityHome"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivitySimplyTrack"
+            android:label="Just Track"
+            android:parentActivityName=".ActivityHome"
+            android:screenOrientation="portrait" />
+
+        <service android:name=".network.TrackService" />
+        <service android:name=".network.TaggingService" />
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyCxjsTUTMA0Pf0-65y_1XtNCxr-ON27u0U" />
+
+        <activity
+            android:name=".ActivitySelectTrip"
+            android:label="@string/title_activity_activity_select_trip"
+            android:parentActivityName=".ActivityHome" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.sevenre.trackre.driver.ActivityHome" />
+        </activity>
+    </application>
+
+</manifest>

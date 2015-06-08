@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lint>
+    <issue id="CutPasteId">
+        <ignore path="src/com/sevenre/trackre/driver/datatypes/OtherInfoExpandableListAdapter.java" />
+    </issue>
+    <issue id="SimpleDateFormat">
+        <ignore path="src/com/sevenre/trackre/driver/datatypes/Trip.java" />
+    </issue>
+</lint>

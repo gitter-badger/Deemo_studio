@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="login_background">#434C63</color>
+    <color name="login_font">#A4B1C9</color>
+
+    <!-- Enter button color -->
+    <color name="dark_blue">#1C6B8C</color>
+    <!-- Pick up tirp right square box color -->
+    <color name="pick_up_list_item">#ffff00</color>
+    <!-- Drop tirp right square box color -->
+    <color name="drop_list_item">#CAFF7A</color>
+    <!-- Backgroud in pick up & drop trip -->
+    <color name="gray">#eee9e9</color>
+
+    <!-- QR Code -->
+    <color name="transparent">#00000000</color>
+    <color name="contents_text">#ff000000</color>
+    <color name="encode_view">#ffffffff</color>
+    <color name="possible_result_points">#c07FFF00</color>
+    <color name="result_image_border">#ff526F35</color>
+    <color name="result_minor_text">#ffc0c0c0</color>
+    <color name="result_points">#c07FFF00</color>
+    <color name="result_text">#ffffffff</color>
+    <color name="result_view">#b0000000</color>
+    <color name="status_view">#50000000</color>
+    <color name="status_text">#ffffffff</color>
+    <color name="viewfinder_frame">#ff526F35</color>
+    <color name="viewfinder_laser">#ff7FFF00</color>
+    <color name="viewfinder_mask">#607CFC00</color>
+
+    <color name="red">#F51111</color>
+    <color name="green">#11F52F</color>
+    <color name="blue">#1159F5</color>
+    <color name="white">#ffffff</color>
+    
+    <!-- Background -->
+    <color name="active_trip_background">#EBEBEA</color>
+    <color name="home_background">#374045</color>
+    
+    <!-- Theme Colors -->
+    <color name="violet_3">#6A3466</color>
+    <color name="violet_2">#4D294A</color>
+    <color name="violet_1">#6A3866</color>
+    <color name="orange_light">#F0C586</color>
+    <color name="orange_dark">#BDA06E</color>
+    <color name="orange_medium">#F2BB5E</color>
+    
+    <!-- Dialog Box -->
+    <color name = "dialog_box_background" >#323232</color>
+    <color name = "dialog_box_text">#cccccc</color>
+    <color name = "dialog_box_title">#f5f5f5</color>
+    <color name = "dialog_box_positive">#86ED74</color>
+    <color name = "dialog_box_negative">#999999</color>
+    
+    <!-- Theme Color -->
+    <color name = "theme_light">#5A5D6E</color> 
+    <color name = "theme_medium">#3A4A5A</color> 
+    <color name = "theme_dark">#333A4D</color> 
+    <color name = "theme_red">#FD8483</color> 
+    <color name = "list_item_background">#F2F2F2</color>
+    <drawable name="transperent_color">#00000000</drawable>
+    <color name = "button_red">#EA7878</color>
+    <color name = "button_green">#77CA72</color> 
+    
+</resources>

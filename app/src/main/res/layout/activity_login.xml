@@ -1,0 +1,35 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@drawable/background_login">
+
+    <EditText
+        android:id="@+id/login_vehicle_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@android:drawable/editbox_background_normal"
+        android:ems="10"
+        android:hint="DL1YA3453"
+        android:padding="15dp"
+        android:singleLine="true"
+        android:textColor="@android:color/background_dark"
+        android:textStyle="bold" >
+    </EditText>
+
+    <Button
+        android:id="@+id/login_enter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/login_vehicle_no"
+        android:layout_alignRight="@+id/login_vehicle_no"
+        android:layout_below="@+id/login_vehicle_no"
+        android:layout_marginTop="14dp"
+        android:background="@color/violet_1"
+        android:text="Enter"
+        android:textSize="25dp"
+        android:textColor="@android:color/white" />
+
+</RelativeLayout>
