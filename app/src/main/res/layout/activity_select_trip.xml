@@ -8,7 +8,7 @@
     <TextView android:id="@+id/select_trip_title"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Hello Driver, your bus no is ..."
+        android:text="GJ 27 L 4332"
         android:background="@color/theme_medium"
         android:textAlignment="center"
         android:gravity="center"
@@ -25,7 +25,6 @@
         android:dividerHeight="20dp"
         android:padding="20dp"
         android:divider="@color/transparent" >
-
     </ListView>
 
     <TextView android:id="@+id/empty"
