@@ -1,8 +1,8 @@
-package com.sevenre.trackre.driver;
+package com.sevenre.trackre.driver.activity;
 
 import java.util.ArrayList;
 
-import android.app.ActionBar;
+import android.support.v7.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -16,11 +16,11 @@ import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ListView;
 
+import com.sevenre.trackre.driver.R;
 import com.sevenre.trackre.driver.database.LiveDatabaseHandler;
 import com.sevenre.trackre.driver.datatypes.TaggingStop;
 import com.sevenre.trackre.driver.listadapter.TaggingStopAdapter;
 import com.sevenre.trackre.driver.network.Server;
-import com.sevenre.trackre.driver.network.TrackService;
 import com.sevenre.trackre.driver.utils.Constants;
 import com.sevenre.trackre.driver.utils.Log;
 import com.sevenre.trackre.driver.utils.NetworkConnectivity;
@@ -46,7 +46,7 @@ public class ActivityTagging extends ActionBarActivity implements OnClickListene
 	
 	private void setUpUI() {
 		lv = (ListView)findViewById(R.id.tagging_list_view);
-		ActionBar bar = getActionBar();
+		ActionBar bar = getSupportActionBar();
 
 		if (bar != null) {
 			bar.setBackgroundDrawable(Constants.ACTION_BAR_COLOR_DRAWABLE);

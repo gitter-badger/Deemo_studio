@@ -1,6 +1,9 @@
 package com.sevenre.trackre.driver.utils;
 
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+
+import com.sevenre.trackre.driver.R;
 
 public class Constants {
 
@@ -20,6 +23,10 @@ public class Constants {
 	public static boolean isAuthentic = true;
 	
 	//colors	
-	public static final ColorDrawable ACTION_BAR_COLOR_DRAWABLE = new ColorDrawable(Utils.getColor(Utils.Theme_dark));
-	
+	public static final ColorDrawable ACTION_BAR_COLOR_DRAWABLE = new ColorDrawable(Color.parseColor("#00BCD4"));
+
+	// Select Trip
+    public static final String TRIP = "com.sevenre.trackre.triptype";
+	public static final int TRIP_DROP = 1;
+	public static final int TRIP_PICK_UP = 2;
 }

@@ -1,4 +1,4 @@
-package com.sevenre.trackre.driver;
+package com.sevenre.trackre.driver.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -14,6 +14,7 @@ import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sevenre.trackre.driver.R;
 import com.sevenre.trackre.driver.database.PushDatabase;
 import com.sevenre.trackre.driver.utils.Constants;
 import com.sevenre.trackre.driver.utils.NetworkConnectivity;
@@ -73,6 +74,7 @@ public class ActivityHome extends Activity implements OnClickListener {
 			}else {
 				if (NetworkConnectivity.isConnectedToInternet(getApplicationContext())) {
 					i.setClass(ActivityHome.this, ActivitySelectTrip.class);
+					i.putExtra(Constants.TRIP, Constants.TRIP_DROP);
 					if (dialog!=null)
 						if (dialog.isShowing())
 							dialog.dismiss();
@@ -95,6 +97,7 @@ public class ActivityHome extends Activity implements OnClickListener {
 			} else {
 				if (NetworkConnectivity.isConnectedToInternet(getApplicationContext())) {
 					i.setClass(ActivityHome.this, ActivitySelectTrip.class);
+					i.putExtra(Constants.TRIP, Constants.TRIP_PICK_UP);
 					if (dialog!=null)
 						if (dialog.isShowing())
 							dialog.dismiss();
@@ -126,6 +129,7 @@ public class ActivityHome extends Activity implements OnClickListener {
 		schoolId = SharedPreference.getSchoolId(mContext);
 		if (schoolId.equals(Utils.ERROR)) {
 			Intent i = new Intent(ActivityHome.this,ActivityAuthenticate.class);
+			i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 			Constants.isAuthentic = false;
 			startActivity(i);
 		}

@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/background_tracking"
+    android:background="#f2f2f2"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -96,25 +96,32 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@drawable/img_tracking_control_button"
         android:gravity="center"
         android:orientation="horizontal" >
 
-        <View
+        <Button
             android:id="@+id/active_trip_cancel"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1" />
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="Cancel"
+            android:textColor="@color/white"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:background="@color/button_red" />
 
-        <View
+        <Button
             android:id="@+id/active_trip_completed"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1" />
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="Finish"
+            android:textColor="@color/white"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:background="@color/button_green" />
     </LinearLayout>
 
 </RelativeLayout>

@@ -1,4 +1,4 @@
-package com.sevenre.trackre.driver;
+package com.sevenre.trackre.driver.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.sevenre.trackre.driver.R;
 import com.sevenre.trackre.driver.database.PushDatabase;
 import com.sevenre.trackre.driver.network.Server;
 import com.sevenre.trackre.driver.utils.Constants;

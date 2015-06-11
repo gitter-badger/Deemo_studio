@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_taggin_activity"
     android:orientation="vertical" >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:minHeight="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="@dimen/toolbar_elevation"
+        app:popupTheme="@style/Theme.AppCompat.Light.DarkActionBar"
+        app:theme="@style/Toolbar">
+
+    </android.support.v7.widget.Toolbar>
 
     <ExpandableListView
         android:id="@+id/other_info_expandable_list"
@@ -12,5 +25,4 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp" >
     </ExpandableListView>
-    
 </LinearLayout>

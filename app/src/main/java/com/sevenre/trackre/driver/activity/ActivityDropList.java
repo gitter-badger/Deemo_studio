@@ -1,4 +1,4 @@
-package com.sevenre.trackre.driver;
+package com.sevenre.trackre.driver.activity;
 
 import java.util.ArrayList;
 
@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.sevenre.trackre.driver.R;
 import com.sevenre.trackre.driver.datatypes.Trip;
 import com.sevenre.trackre.driver.listadapter.TripAdapter;
 import com.sevenre.trackre.driver.network.Server;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sevenre.trackre.driver"
-    android:versionCode="1"
+    android:versionCode="2"
     android:versionName="1.0" >
 
     <uses-sdk
@@ -44,7 +44,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".ActivityHome"
+            android:name=".activity.ActivityHome"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -54,49 +54,53 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ActivityLogin"
+            android:name=".activity.ActivityLogin"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityAuthenticate"
+            android:name=".activity.ActivityAuthenticate"
             android:noHistory="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityPickUpList"
+            android:name=".activity.ActivityPickUpList"
             android:noHistory="true"
-            android:parentActivityName=".ActivityHome"
+            android:parentActivityName=".activity.ActivityHome"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityDropList"
+            android:name=".activity.ActivityDropList"
             android:noHistory="true"
-            android:parentActivityName=".ActivityHome"
+            android:parentActivityName=".activity.ActivityHome"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainActivity"
-            android:parentActivityName=".ActivityHome"
+            android:name=".activity.MainActivity"
+            android:parentActivityName=".activity.ActivityHome"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ActivityTagging"
+            android:name=".activity.ActivityTagging"
             android:label="@string/activity_tagging"
-            android:parentActivityName=".ActivityHome"
+            android:parentActivityName=".activity.ActivityHome"
             android:screenOrientation="portrait" />
         <activity
             android:name=".qrcode.CaptureActivity"
             android:configChanges="orientation|keyboardHidden"
             android:icon="@drawable/icon"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".activity.MainActivity"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             android:windowSoftInputMode="stateAlwaysHidden" />
+
         <activity
-            android:name=".ActivityOtherInfo"
+            android:name=".activity.ActivityOtherInfo"
             android:label="Other Info"
-            android:parentActivityName=".ActivityHome"
-            android:screenOrientation="portrait" />
+            android:parentActivityName=".activity.ActivityHome"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Toolbar"/>
+
         <activity
-            android:name=".ActivitySimplyTrack"
+            android:name=".activity.ActivitySimplyTrack"
             android:label="Just Track"
-            android:parentActivityName=".ActivityHome"
-            android:screenOrientation="portrait" />
+            android:parentActivityName=".activity.ActivityHome"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Toolbar"/>
 
         <service android:name=".network.TrackService" />
         <service android:name=".network.TaggingService" />
@@ -106,12 +110,17 @@
             android:value="AIzaSyCxjsTUTMA0Pf0-65y_1XtNCxr-ON27u0U" />
 
         <activity
-            android:name=".ActivitySelectTrip"
+            android:name=".activity.ActivitySelectTrip"
             android:label="@string/title_activity_activity_select_trip"
-            android:parentActivityName=".ActivityHome" >
+            android:parentActivityName=".activity.ActivityHome"
+            android:theme="@style/AppTheme.Toolbar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.sevenre.trackre.driver.ActivityHome" />
+                android:value=".activity.ActivityHome" />
+        </activity>
+        <activity
+            android:name=".activity.ActivityTracking"
+            android:label="@string/title_activity_activity_tracking" >
         </activity>
     </application>
 

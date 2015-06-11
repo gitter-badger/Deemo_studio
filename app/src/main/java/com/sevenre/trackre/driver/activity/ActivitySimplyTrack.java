@@ -1,28 +1,26 @@
-package com.sevenre.trackre.driver;
+package com.sevenre.trackre.driver.activity;
 
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.sevenre.trackre.driver.R;
 import com.sevenre.trackre.driver.utils.Constants;
 import com.sevenre.trackre.driver.utils.NetworkConnectivity;
 
 
-public class ActivitySimplyTrack extends ActionBarActivity implements LocationListener {
+public class ActivitySimplyTrack extends AppCompatActivity implements LocationListener {
 
 	GoogleMap googleMap;
 	Context mContext;
@@ -34,7 +32,14 @@ public class ActivitySimplyTrack extends ActionBarActivity implements LocationLi
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_simply_track);
-//		getActionBar().setBackgroundDrawable(Constants.ACTION_BAR_COLOR_DRAWABLE);
+
+		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+		setSupportActionBar(toolbar);
+		ActionBar ab = getSupportActionBar();
+		if (ab != null) {
+			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		}
+
 		mContext = getApplicationContext();
 		googleMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.simply_track_map)).getMap();
 		initializeLocationParameters();

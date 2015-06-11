@@ -1,9 +1,11 @@
-package com.sevenre.trackre.driver;
+package com.sevenre.trackre.driver.activity;
 
 import java.util.Locale;
 
+import com.sevenre.trackre.driver.R;
 import com.sevenre.trackre.driver.fragment.FragmentAttendance;
 import com.sevenre.trackre.driver.fragment.FragmentTracking;
+import com.sevenre.trackre.driver.utils.Constants;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -31,9 +33,8 @@ public class MainActivity extends ActionBarActivity implements
 		final ActionBar actionBar = getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		actionBar.setHomeButtonEnabled(true);
-		actionBar.setBackgroundDrawable(new ColorDrawable(Color.rgb(243,187,90)));
-		actionBar.setIcon(getResources().getDrawable(R.drawable.icon_home));
-		actionBar.setStackedBackgroundDrawable(new ColorDrawable(Color.parseColor("#B5C0D0")));
+		actionBar.setBackgroundDrawable(Constants.ACTION_BAR_COLOR_DRAWABLE);
+		//actionBar.setStackedBackgroundDrawable(Constants.ACTION_BAR_COLOR_DRAWABLE);
 		
 		new SetupUI().execute();
 	}
@@ -50,7 +51,7 @@ public class MainActivity extends ActionBarActivity implements
 			mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 				@Override
 				public void onPageSelected(int position) {
-					getActionBar().setSelectedNavigationItem(position);
+					getSupportActionBar().setSelectedNavigationItem(position);
 				}
 			});
 

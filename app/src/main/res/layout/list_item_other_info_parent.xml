@@ -13,6 +13,6 @@
         android:layout_marginTop="10dp"
         android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/theme_medium"/>
+        android:textColor="@color/primary_text"/>
 
 </LinearLayout>

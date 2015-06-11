@@ -26,6 +26,7 @@ import com.sevenre.trackre.driver.database.LiveDatabaseHandler;
 import com.sevenre.trackre.driver.datatypes.Stop;
 import com.sevenre.trackre.driver.datatypes.Trip;
 import com.sevenre.trackre.driver.network.Server;
+import com.sevenre.trackre.driver.utils.Constants;
 import com.sevenre.trackre.driver.utils.NetworkConnectivity;
 import com.sevenre.trackre.driver.utils.SharedPreference;
 import com.sevenre.trackre.driver.utils.Utils;
@@ -71,6 +72,7 @@ public class StartTripDialogBox extends Dialog implements android.view.View.OnCl
 		tv.setText(t.getDisplayName());
 	    tv = (TextView) findViewById(R.id.dialog_box_title);
 		tv.setText(""+t.getTime());
+
 	}
 	
 	@Override
@@ -138,6 +140,7 @@ public class StartTripDialogBox extends Dialog implements android.view.View.OnCl
 				SharedPreference.setDriverId(mContext, driverId);
 				mContext.startActivity(i);
 				mContext.startService(s);
+				
 				if(dialog!=null)
 					if(dialog.isShowing())
 						dialog.cancel();

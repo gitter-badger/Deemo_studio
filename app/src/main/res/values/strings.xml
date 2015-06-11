@@ -58,5 +58,6 @@
     <string name="title_activity_activity_select_trip">Select Trip</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_activity_tracking">Tracking</string>
 
 </resources>

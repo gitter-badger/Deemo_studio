@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:text="name"
-        android:textColor="@color/theme_dark"
+        android:textColor="@color/primary_text"
         android:textSize="20dp"
         android:textStyle="bold" />
 
@@ -23,7 +23,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginTop="7dp"
         android:text="+49151"
-        android:textColor="@color/theme_medium"
+        android:textColor="@color/secondary_text"
         android:textSize="15dp" />
 
 </LinearLayout>

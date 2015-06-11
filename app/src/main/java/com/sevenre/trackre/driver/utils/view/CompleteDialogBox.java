@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.sevenre.trackre.driver.ActivityHome;
+import com.sevenre.trackre.driver.activity.ActivityHome;
 import com.sevenre.trackre.driver.R;
 import com.sevenre.trackre.driver.database.LiveDatabaseHandler;
 import com.sevenre.trackre.driver.datatypes.Stop;

@@ -1,4 +1,4 @@
-package com.sevenre.trackre.driver;
+package com.sevenre.trackre.driver.activity;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.sevenre.trackre.driver.R;
 import com.sevenre.trackre.driver.network.Server;
 import com.sevenre.trackre.driver.utils.Constants;
 import com.sevenre.trackre.driver.utils.Log;
@@ -35,7 +36,13 @@ public class ActivityAuthenticate extends Activity implements OnClickListener{
 		setContentView(R.layout.activity_login);
 		setUpUI();
 	}
-	
+
+	@Override
+	public void onBackPressed() {
+		finish();
+		super.onBackPressed();
+	}
+
 	private void setUpUI() {
 		schoolId = (EditText) findViewById(R.id.login_vehicle_no);
 		enter = (Button) findViewById(R.id.login_enter);
