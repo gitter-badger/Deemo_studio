@@ -9,4 +9,5 @@
 	<dimen name="login_edittext_margin">40dp</dimen>
     
     <dimen name="toolbar_elevation">4dp</dimen>
+    <dimen name="tab_height">48dp</dimen>
 </resources>

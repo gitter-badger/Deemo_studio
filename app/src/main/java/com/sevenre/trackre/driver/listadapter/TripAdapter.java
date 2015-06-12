@@ -44,8 +44,8 @@ public class TripAdapter extends BaseAdapter {
 		time.setTypeface(Utils.getTypeFace(activity.getAssets(), Utils.roboto));
 		
 		TextView description = (TextView) vi.findViewById(R.id.list_item_trip_description);
-		description.setText("06:45   Mayur Vihar\n07:55   Vasant Kunj");
-		description.setTypeface(Utils.getTypeFace(activity.getAssets(), Utils.robotoCondensed));
+		description.setText("Fraunhofer zentrum, Amazon, Google, Microsoft, Salesforce, Terabyte, Facebook");
+		description.setTypeface(Utils.getTypeFace(activity.getAssets(), Utils.roboto));
 		
 		return vi;
 	}

@@ -99,7 +99,7 @@ public class ActivitySelectTrip extends AppCompatActivity {
                 StartTripDialogBox d;
                 Trip t = (Trip) result.get(position);
                 if (Constants.TRIP_DROP == TRIP/*t.getTripStatus().contains("track")*/) {
-                    final Intent i = new Intent(ActivitySelectTrip.this, MainActivity.class);
+                    final Intent i = new Intent(ActivitySelectTrip.this, ActivityTracking.class);
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     d = new StartTripDialogBox(ActivitySelectTrip.this, i, s, t);
                 } else {
