@@ -39,15 +39,14 @@ public class VehicleIdDialogBox extends Dialog implements
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.dialog_box_vehicle_id);
-		cancel = (Button)findViewById(R.id.dialog_box_cancel);
-		login = (Button)findViewById(R.id.dialog_box_login);
+		cancel = (Button)findViewById(R.id.dialog_box_no);
+		cancel.setText("CANCEL");
+		login = (Button)findViewById(R.id.dialog_box_yes);
+		login.setText("LOGIN");
 		setCancelable(true);
 		setCanceledOnTouchOutside(false);
 		cancel.setOnClickListener(this);
 		login.setOnClickListener(this);
-		cancel.setTypeface(Utils.getTypeFace(activity.getAssets(), Utils.erasBold));
-		login.setTypeface(Utils.getTypeFace(activity.getAssets(), Utils.erasBold));
-		
 		TextView tv = (TextView) findViewById(R.id.dialog_box_title);
 		tv.setText("Vehicle No");
 		vehcileNo = (EditText)findViewById(R.id.dialog_box_vehicle_id);
@@ -57,10 +56,10 @@ public class VehicleIdDialogBox extends Dialog implements
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.dialog_box_cancel:
+		case R.id.dialog_box_no:
 			dismiss();
 			break;
-		case R.id.dialog_box_login:
+		case R.id.dialog_box_yes:
 			if (vehcileNo.getText().toString().length() < 6) {
 				Toast.makeText(getContext(), "Enter proper number", Toast.LENGTH_SHORT).show();
 				break;

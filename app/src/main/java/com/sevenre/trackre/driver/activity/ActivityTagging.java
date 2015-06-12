@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
@@ -46,12 +47,11 @@ public class ActivityTagging extends ActionBarActivity implements OnClickListene
 	
 	private void setUpUI() {
 		lv = (ListView)findViewById(R.id.tagging_list_view);
-		ActionBar bar = getSupportActionBar();
-
-		if (bar != null) {
-			bar.setBackgroundDrawable(Constants.ACTION_BAR_COLOR_DRAWABLE);
-			bar.setTitle(SharedPreference.getTripId(context) + " " + SharedPreference.getTripStatus(context));
-			bar.setDisplayHomeAsUpEnabled(true);
+		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+		setSupportActionBar(toolbar);
+		ActionBar ab = getSupportActionBar();
+		if (ab != null) {
+			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		}
 
 //		((ImageButton)findViewById(R.id.tagging_add_new_stop)).setEnabled(false);

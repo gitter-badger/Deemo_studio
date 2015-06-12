@@ -61,27 +61,25 @@ public class TagParkStopDialogBox extends Dialog implements OnClickListener, Loc
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.dialog_box_tag_park_stop);
+
 		yes = (Button) findViewById(R.id.dialog_box_yes);
 		no = (Button) findViewById(R.id.dialog_box_no);
 		yes.setOnClickListener(this);
 		no.setOnClickListener(this);
-		yes.setTypeface(Utils.getTypeFace(activity.getAssets(), Utils.erasBold));
-		no.setTypeface(Utils.getTypeFace(activity.getAssets(), Utils.erasBold));
-		
+
 		if (Constants.MODE == Constants.USER_MODE) {
 			yes.setVisibility(View.GONE);
 			no.setVisibility(View.GONE);
 			findViewById(R.id.dialog_box_select_trip_text).setVisibility(View.GONE);
 		}
-		
+
 		googleMap = ((MapFragment) activity.getFragmentManager().findFragmentById(R.id.dialog_tag_park_map)).getMap();
 		TextView tv = (TextView) findViewById(R.id.dialog_box_select_trip_text);
 		tv.setText("Update park station position to current?");
 		tv = (TextView) findViewById(R.id.dialog_box_title);
 		tv.setText(stop.getName());
-		initializeLocationParameters();
-		
-		
+
+        initializeLocationParameters();
 	}
 	
 	@Override
@@ -140,7 +138,7 @@ public class TagParkStopDialogBox extends Dialog implements OnClickListener, Loc
 		}
 	}
 
-	@Override public void onProviderDisabled(String provider) {Toast.makeText(activity, R.string.no_gps, 9000).show();}
+	@Override public void onProviderDisabled(String provider) {Toast.makeText(activity, R.string.no_gps, Toast.LENGTH_LONG).show();}
 
 	@Override public void onProviderEnabled(String provider) {}
 

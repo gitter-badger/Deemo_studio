@@ -48,12 +48,8 @@ public class CompleteDialogBox extends Dialog implements android.view.View.OnCli
 		no = (Button) findViewById(R.id.dialog_box_no);
 		yes.setOnClickListener(this);
 		no.setOnClickListener(this);
-		yes.setTypeface(Utils.getTypeFace(a.getAssets(), Utils.erasBold));
-		no.setTypeface(Utils.getTypeFace(a.getAssets(), Utils.erasBold));
-		
 		TextView tv  = (TextView) findViewById(R.id.dialog_box_title);
 		tv.setText("Complete Trip?");
-		
 		driverPin = (EditText)findViewById(R.id.dialog_box_driver_pin);
 	}
 

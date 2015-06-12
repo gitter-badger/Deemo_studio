@@ -1,4 +1,4 @@
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
     <style name="AppBaseTheme" parent="Theme.AppCompat.Light">
 
     </style>
@@ -31,5 +31,22 @@
         <item name="android:topBright">@color/transparent</item>
         <item name="android:topDark">@color/transparent</item>
     </style>
+
+    <style name="AppTheme.TextButton" tools:ignore="NewApi">
+        <item name="android:textSize">@dimen/dialog_button_textsize</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:gravity">center</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:background">@null</item>
+        <item name="android:minWidth">@dimen/dialog_button_min_width</item>
+        <item name="android:paddingLeft">@dimen/dialog_button_textpadding_horizontal</item>
+        <item name="android:paddingRight">@dimen/dialog_button_textpadding_horizontal</item>
+    </style>
+
+    <!--<style name="EditTextCustomHolo" parent="android:Widget.EditText">-->
+        <!--<item name="android:background">@drawable/apptheme_edit_text_holo_light</item>-->
+        <!--<item name="android:textColor">#ffffff</item>-->
+    <!--</style>-->
 
 </resources>

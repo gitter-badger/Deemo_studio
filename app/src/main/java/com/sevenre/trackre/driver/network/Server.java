@@ -23,6 +23,7 @@ import com.sevenre.trackre.driver.datatypes.Stop;
 import com.sevenre.trackre.driver.datatypes.TaggingStop;
 import com.sevenre.trackre.driver.datatypes.Trip;
 import com.sevenre.trackre.driver.utils.Constants;
+import com.sevenre.trackre.driver.utils.Log;
 import com.sevenre.trackre.driver.utils.Utils;
 
 @SuppressLint("SimpleDateFormat") public class Server {
@@ -355,9 +356,7 @@ import com.sevenre.trackre.driver.utils.Utils;
 	public static ArrayList<ParkStop> getParkStation(String schoolId) {
 		ArrayList<ParkStop> list = new ArrayList<ParkStop>();
 		String url = getParkStation + schoolId;
-		System.out.println(url);
 		String result = readFromUrl(url);
-		System.out.println(result);
 		JSONObject object; 
 		if (result==null) {
 			return list;
@@ -390,16 +389,20 @@ import com.sevenre.trackre.driver.utils.Utils;
 		return list;
 	}
 	
-	public static boolean tagParkStation(ParkStop stop, String schoolId){
-		String url = tagParkstation + 
+	public static boolean tagParkStation(ParkStop stop, String schoolId) {
+		String url = tagParkstation +
 				"schoolId=" + schoolId +
 				"&stopId=" + stop.getId() +
 				"&lat=" + stop.getLat() +
 				"&lng=" + stop.getLng();
 		String result = readFromUrl(url);
-		if (result==null)
+		Log.e(url);
+		Log.e(result);
+		if (result == null) {
+			Log.e(result);
 			return false;
-		
+		}
+
 		try {
 			JSONObject object = new JSONObject(result);
 			if(object.has(SUCCESS) && object.getBoolean(SUCCESS)) {

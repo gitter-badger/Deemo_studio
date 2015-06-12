@@ -8,6 +8,8 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -65,14 +67,11 @@ public class StartTripDialogBox extends Dialog implements android.view.View.OnCl
 	    no = (Button) findViewById(R.id.dialog_box_no);
 	    yes.setOnClickListener(this);
 	    no.setOnClickListener(this);
-	    yes.setTypeface(Utils.getTypeFace(mContext.getAssets(), Utils.erasBold));
-		no.setTypeface(Utils.getTypeFace(mContext.getAssets(), Utils.erasBold));
-		driverPin = (EditText)findViewById(R.id.dialog_box_driver_pin);
+	    driverPin = (EditText)findViewById(R.id.dialog_box_driver_pin);
 		TextView tv = (TextView) findViewById(R.id.dialog_box_select_trip_text);
-		tv.setText(t.getDisplayName());
+		tv.setText(t.getName());
 	    tv = (TextView) findViewById(R.id.dialog_box_title);
 		tv.setText(""+t.getTime());
-
 	}
 	
 	@Override

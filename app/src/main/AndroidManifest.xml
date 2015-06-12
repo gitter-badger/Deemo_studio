@@ -78,7 +78,8 @@
             android:name=".activity.ActivityTagging"
             android:label="@string/activity_tagging"
             android:parentActivityName=".activity.ActivityHome"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Toolbar"/>
         <activity
             android:name=".qrcode.CaptureActivity"
             android:configChanges="orientation|keyboardHidden"
