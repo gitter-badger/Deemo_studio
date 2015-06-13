@@ -29,7 +29,7 @@ import com.sevenre.trackre.driver.utils.view.CompleteDialogBox;
 public class FragmentTracking extends Fragment implements OnClickListener {
 
 	View rootView;
-	TextView route_no, route_name, route_time;
+	//TextView route_no, route_name, route_time;
 	View cancel, completed;
 	ListView nextStop;	
 	ArrayList<Stop> result;
@@ -57,9 +57,9 @@ public class FragmentTracking extends Fragment implements OnClickListener {
 		
 	}
 	private void setUpUI() {
-		route_no = (TextView) rootView.findViewById(R.id.active_trip_active_route_no);
-		route_name = (TextView) rootView.findViewById(R.id.active_trip_active_route_name);
-		route_time = (TextView) rootView.findViewById(R.id.active_trip_active_route_time);
+		//route_no = (TextView) rootView.findViewById(R.id.active_trip_active_route_no);
+		//route_name = (TextView) rootView.findViewById(R.id.active_trip_active_route_name);
+		//route_time = (TextView) rootView.findViewById(R.id.active_trip_active_route_time);
 
 		cancel = rootView.findViewById(R.id.active_trip_cancel);
 		completed = rootView.findViewById(R.id.active_trip_completed);
@@ -68,6 +68,7 @@ public class FragmentTracking extends Fragment implements OnClickListener {
 		completed.setOnClickListener(FragmentTracking.this);
 
 		nextStop = (ListView) rootView.findViewById(R.id.active_trip_next_stop_list_view);
+		nextStop.setDividerHeight(0);
 		
 		updateNextStop = new Timer();
 		updateNextStop.schedule(updateNextStopTask, 10000, 10000);
@@ -141,5 +142,6 @@ public class FragmentTracking extends Fragment implements OnClickListener {
 			super.onPostExecute(result);
 		}
 	}
-}
+}
+
 

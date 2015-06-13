@@ -26,6 +26,13 @@
                 app:popupTheme="@style/Theme.AppCompat.Light.DarkActionBar"
                 app:theme="@style/Toolbar" />
 
+
+            <include layout="@layout/next_stop_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"/>
+
             <com.sevenre.trackre.driver.views.lib.SlidingTabLayout
                 android:id="@+id/sliding_tabs"
                 android:layout_width="match_parent"

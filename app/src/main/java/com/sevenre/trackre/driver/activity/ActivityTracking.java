@@ -17,6 +17,7 @@ import com.nineoldandroids.view.ViewHelper;
 import com.sevenre.trackre.driver.R;
 import com.sevenre.trackre.driver.fragment.FragmentAttendance;
 import com.sevenre.trackre.driver.fragment.FragmentTracking;
+import com.sevenre.trackre.driver.utils.SharedPreference;
 import com.sevenre.trackre.driver.views.lib.CacheFragmentStatePagerAdapter;
 import com.sevenre.trackre.driver.views.lib.ObservableScrollViewCallbacks;
 import com.sevenre.trackre.driver.views.lib.ScrollState;
@@ -42,6 +43,7 @@ public class ActivityTracking extends BaseActivity implements ObservableScrollVi
         setContentView(R.layout.activity_tracking);
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(SharedPreference.getVehicleNo(getApplicationContext()));
         ViewCompat.setElevation(findViewById(R.id.header), getResources().getDimension(R.dimen.toolbar_elevation));
         mToolbarView = findViewById(R.id.toolbar);
         mPagerAdapter = new NavigationAdapter(getSupportFragmentManager());

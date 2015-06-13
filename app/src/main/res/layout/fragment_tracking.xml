@@ -5,86 +5,17 @@
     android:orientation="vertical" >
 
     <LinearLayout
-        android:id="@+id/tracking_linear_layout_next_screen"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
-
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:src="@drawable/img_next_stop" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:background="@color/transparent"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="2dp" >
-
-                <TextView
-                    android:id="@+id/active_trip_active_route_no"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="02"
-                    android:textSize="45dp" 
-                    android:paddingRight="12dp"
-                    android:textColor="@color/violet_2"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="@color/orange_medium"
-                android:gravity="center_vertical"
-                android:orientation="vertical" 
-                android:paddingLeft="20dp" >
-
-                <TextView
-                    android:id="@+id/active_trip_active_route_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Kaiserslautern"
-                    android:textSize="25dp"
-                    android:textColor="@color/gray"/>
-
-                <TextView
-                    android:id="@+id/active_trip_active_route_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="9:45 PM // 9:50 PM"
-                    android:textSize="20dp"
-                    android:textColor="@color/violet_3"/>
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/tracking_linear_layout_control_buttons"
-        android:layout_below="@id/tracking_linear_layout_next_screen"
+        android:layout_alignParentTop="true"
         android:layout_margin="10dp"
         android:orientation="vertical" >
-
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:src="@drawable/img_time_table" />
 
         <ListView
             android:id="@+id/active_trip_next_stop_list_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="fill_parent" >
         </ListView>
     </LinearLayout>
 

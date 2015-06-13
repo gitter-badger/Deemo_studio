@@ -68,21 +68,21 @@ public class TaggingStopAdapter extends BaseAdapter implements android.widget.Ad
 			vi.findViewById(R.id.route_line_bottom).setBackgroundColor(Color.TRANSPARENT);;
 		}
 
-		TextView route_no = (TextView) vi.findViewById(R.id.active_trip_next_stop_no);
+		//TextView route_no = (TextView) vi.findViewById(R.id.active_trip_next_stop_no);
 		TextView time = (TextView) vi.findViewById(R.id.active_trip_next_stop_time);
 		TextView name = (TextView) vi.findViewById(R.id.active_trip_next_stop_name);
 		
-		route_no.setTypeface(Utils.getTypeFace(activity.getAssets(), Utils.robotoCondensed));
+		//route_no.setTypeface(Utils.getTypeFace(activity.getAssets(), Utils.robotoCondensed));
 		time.setTypeface(Utils.getTypeFace(activity.getAssets(), Utils.roboto));
 		name.setTypeface(Utils.getTypeFace(activity.getAssets(), Utils.roboto));
 		
 		TaggingStop t = (TaggingStop) data.get(position);
-		route_no.setText(""+(Integer.parseInt(t.getNo())-1));
-		time.setText(t.getTime());
+		//route_no.setText(""+(Integer.parseInt(t.getNo())-1));
+		time.setText(t.getTime().substring(0,5));
 		name.setText(t.getName());
 		
 		if (t.isTagged()) {
-			route_no.setTextColor(resources.getColor(R.color.orange_light));
+			//route_no.setTextColor(resources.getColor(R.color.orange_light));
 			time.setTextColor(resources.getColor(R.color.orange_light));
 			name.setTextColor(resources.getColor(R.color.orange_light));
 			//vi.findViewById(R.id.list_item_tagging_line).setBackgroundColor(resources.getColor(R.color.orange_light));
@@ -164,16 +164,13 @@ public class TaggingStopAdapter extends BaseAdapter implements android.widget.Ad
 			no = (Button) findViewById(R.id.dialog_box_no);
 			yes.setOnClickListener(this);
 			no.setOnClickListener(this);
-			yes.setTypeface(Utils.getTypeFace(activity.getAssets(), Utils.erasBold));
-			no.setTypeface(Utils.getTypeFace(activity.getAssets(), Utils.erasBold));
-			
+
 			TextView tv = (TextView) findViewById(R.id.dialog_box_select_trip_text);
 			tv.setTypeface(Utils.getTypeFace(activity.getAssets(), Utils.roboto));
 			tv.setText(msg);
 			tv = (TextView) findViewById(R.id.dialog_box_title);
 			tv.setText(title);
 			tv.setMovementMethod(new ScrollingMovementMethod());
-			tv.setTypeface(Utils.getTypeFace(activity.getAssets(), Utils.erasBold));
 		}
 
 		@Override
@@ -181,7 +178,7 @@ public class TaggingStopAdapter extends BaseAdapter implements android.widget.Ad
 			switch (v.getId()) {
 			case R.id.dialog_box_yes:
 				if (!NetworkConnectivity.isGPSConnected(activity)) {
-					Toast.makeText(activity, R.string.no_gps, 6000).show();
+					Toast.makeText(activity, R.string.no_gps, Toast.LENGTH_LONG).show();
 					break;
 				}
 				new TagPosition().execute();

@@ -2,6 +2,7 @@ package com.sevenre.trackre.driver.activity;
 
 import java.util.ArrayList;
 
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -14,6 +15,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ListView;
 
@@ -84,6 +86,30 @@ public class ActivityTagging extends ActionBarActivity implements OnClickListene
 	@Override
 	public void onClick(View v) {
 		
+	}
+
+	@Override
+	protected void onPostResume() {
+		super.onPostResume();
+		onCoachMark();
+	}
+
+	public void onCoachMark(){
+
+		final Dialog dialog = new Dialog(this,android.R.style.Theme_Translucent_NoTitleBar);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.coach_mark_tagging);
+		dialog.setCanceledOnTouchOutside(true);
+		//for dismissing anywhere you touch
+		View masterView = dialog.findViewById(R.id.coach_mark_master_view);
+		masterView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				dialog.dismiss();
+			}
+		});
+		dialog.show();
 	}
 	
 	public void taggingOnClick(View v) {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,17 +38,25 @@ public class NextStopAdapter extends BaseAdapter {
 		View vi = convertView;
 		vi = inflater.inflate(R.layout.list_item_active_trip_stop, null);
 
-		TextView route_no = (TextView) vi.findViewById(R.id.active_trip_next_stop_no);
+		if (position == 0) {
+			vi.findViewById(R.id.route_line_top).setBackgroundColor(Color.TRANSPARENT);
+		}
+
+		if (position == data.size()-1) {
+			vi.findViewById(R.id.route_line_bottom).setBackgroundColor(Color.TRANSPARENT);;
+		}
+
+		//TextView route_no = (TextView) vi.findViewById(R.id.active_trip_next_stop_no);
 		TextView time = (TextView) vi.findViewById(R.id.active_trip_next_stop_time);
 		TextView name = (TextView) vi.findViewById(R.id.active_trip_next_stop_name);
 		
-		route_no.setTypeface(Utils.getTypeFace(activity.getAssets(), Utils.robotoCondensed));
+		//route_no.setTypeface(Utils.getTypeFace(activity.getAssets(), Utils.robotoCondensed));
 		time.setTypeface(Utils.getTypeFace(activity.getAssets(), Utils.roboto));
 		name.setTypeface(Utils.getTypeFace(activity.getAssets(), Utils.roboto));
 		
 		Stop t = (Stop) data.get(position);
-		route_no.setText(""+(Integer.parseInt(t.getNo())-1));
-		time.setText(t.getTime());
+		//route_no.setText(""+(Integer.parseInt(t.getNo())-1));
+		time.setText(t.getTime().substring(0,5));
 		name.setText(t.getName());
 		return vi;
 	}

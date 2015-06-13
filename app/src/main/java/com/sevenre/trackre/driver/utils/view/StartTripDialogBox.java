@@ -16,6 +16,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -139,10 +140,17 @@ public class StartTripDialogBox extends Dialog implements android.view.View.OnCl
 				SharedPreference.setDriverId(mContext, driverId);
 				mContext.startActivity(i);
 				mContext.startService(s);
-				
-				if(dialog!=null)
-					if(dialog.isShowing())
-						dialog.cancel();
+
+				Handler handler = new Handler();
+				handler.postDelayed(new Runnable() {
+					public void run() {
+						if(dialog!=null)
+							if(dialog.isShowing())
+								dialog.dismiss();
+					}
+				}, 3000);
+
+
 			} else {
 				if (driverId<0) {
 					Toast.makeText(mContext, "Unable to start trip", Toast.LENGTH_LONG).show();
