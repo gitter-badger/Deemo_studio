@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sevenre.trackre.driver"
-    android:versionCode="3"
-    android:versionName="1.0" >
+    package="com.sevenre.trackre.vehicle"
+    android:versionCode="5"
+    android:versionName="1.0.2" >
 
     <uses-sdk
         android:minSdkVersion="16"
         android:targetSdkVersion="19" />
 
     <uses-feature android:name="android.hardware.camera" />
+
     <uses-feature
         android:name="android.hardware.camera.autofocus"
         android:required="false" />
+
     <uses-feature
         android:name="android.hardware.touchscreen"
         android:required="false" />
 
     <permission
-        android:name="com.sevenre.trackre.driver.permission.MAPS_RECEIVE"
+        android:name="com.sevenre.trackre.vehicle.permission.MAPS_RECEIVE"
         android:protectionLevel="signature" />
 
     <uses-feature
@@ -44,92 +46,72 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".activity.ActivityHome"
+            android:name="com.sevenre.trackre.vehicle.activity.ActivityHome"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".activity.ActivityLogin"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.ActivityAuthenticate"
+            android:name="com.sevenre.trackre.vehicle.activity.ActivityAuthenticate"
             android:noHistory="true"
             android:screenOrientation="portrait" />
+
+
         <activity
-            android:name=".activity.ActivityPickUpList"
-            android:noHistory="true"
-            android:parentActivityName=".activity.ActivityHome"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.ActivityDropList"
-            android:noHistory="true"
-            android:parentActivityName=".activity.ActivityHome"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.MainActivity"
-            android:parentActivityName=".activity.ActivityHome"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.ActivityTagging"
+            android:name="com.sevenre.trackre.vehicle.activity.ActivityTagging"
             android:label="@string/activity_tagging"
-            android:parentActivityName=".activity.ActivityHome"
+            android:parentActivityName="com.sevenre.trackre.vehicle.activity.ActivityHome"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Toolbar"/>
         <activity
-            android:name=".qrcode.CaptureActivity"
+            android:name="com.sevenre.trackre.vehicle.qrcode.CaptureActivity"
             android:configChanges="orientation|keyboardHidden"
             android:icon="@drawable/icon"
-            android:parentActivityName=".activity.MainActivity"
+            android:parentActivityName="com.sevenre.trackre.vehicle.activity.MainActivity"
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             android:windowSoftInputMode="stateAlwaysHidden" />
 
         <activity
-            android:name=".activity.ActivityOtherInfo"
+            android:name="com.sevenre.trackre.vehicle.activity.ActivityOtherInfo"
             android:label="Other Info"
-            android:parentActivityName=".activity.ActivityHome"
+            android:parentActivityName="com.sevenre.trackre.vehicle.activity.ActivityHome"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Toolbar"/>
 
         <activity
-            android:name=".activity.ActivitySimplyTrack"
+            android:name="com.sevenre.trackre.vehicle.activity.ActivitySimplyTrack"
             android:label="Just Track"
-            android:parentActivityName=".activity.ActivityHome"
+            android:parentActivityName="com.sevenre.trackre.vehicle.activity.ActivityHome"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Toolbar"/>
 
-        <service android:name=".network.TrackService" />
-        <service android:name=".network.TaggingService" />
-
-        <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyCxjsTUTMA0Pf0-65y_1XtNCxr-ON27u0U" />
+        <service android:name="com.sevenre.trackre.vehicle.network.TrackService" />
+        <service android:name="com.sevenre.trackre.vehicle.network.TaggingService" />
 
         <activity
-            android:name=".activity.ActivitySelectTrip"
+            android:name="com.sevenre.trackre.vehicle.activity.ActivitySelectTrip"
             android:label="@string/title_activity_activity_select_trip"
-            android:parentActivityName=".activity.ActivityHome"
+            android:parentActivityName="com.sevenre.trackre.vehicle.activity.ActivityHome"
             android:theme="@style/AppTheme.Toolbar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.ActivityHome" />
+                android:value="com.sevenre.trackre.vehicle.activity.ActivityHome" />
         </activity>
         <activity
-            android:name=".activity.ActivityTracking"
+            android:name="com.sevenre.trackre.vehicle.activity.ActivityTracking"
             android:label="@string/title_activity_activity_tracking"
-            android:parentActivityName=".activity.ActivityHome"
+            android:parentActivityName="com.sevenre.trackre.vehicle.activity.ActivityHome"
             android:theme="@style/AppTheme.Toolbar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyDdHQVSNdFLAunCmHbBVnuipoDm4a2184k" />
     </application>
 
 </manifest>

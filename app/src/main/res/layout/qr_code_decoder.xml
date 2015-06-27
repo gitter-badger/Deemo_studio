@@ -23,12 +23,12 @@
                android:layout_height="fill_parent">
   </SurfaceView>
 
-  <com.sevenre.trackre.driver.qrcode.ViewfinderView
+  <com.sevenre.trackre.vehicle.qrcode.ViewfinderView
       android:id="@+id/viewfinder_view"
       android:layout_width="fill_parent"
       android:layout_height="fill_parent"
       android:background="@color/transparent">
-  </com.sevenre.trackre.driver.qrcode.ViewfinderView>
+  </com.sevenre.trackre.vehicle.qrcode.ViewfinderView>
 
   <TextView android:id="@+id/status_view"
             android:layout_width="wrap_content"

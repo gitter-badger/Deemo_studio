@@ -5,8 +5,8 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.sevenre.trackre.driver"
-        minSdkVersion 21
+        applicationId "com.sevenre.trackre.vehicle"
+        minSdkVersion 19
         targetSdkVersion 21
     }
 
@@ -22,7 +22,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.1.1'
     compile 'com.android.support:recyclerview-v7:+'
     compile 'com.nineoldandroids:library:2.4.0'
-    compile 'com.android.support:support-v4:19.1.0'
+    //compile 'com.android.support:support-v4:19.1.0'
     compile 'com.google.android.gms:play-services:+'
     compile files('libs/core.jar')
 }
