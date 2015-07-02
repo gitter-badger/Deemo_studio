@@ -22,7 +22,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.1.1'
     compile 'com.android.support:recyclerview-v7:+'
     compile 'com.nineoldandroids:library:2.4.0'
-    //compile 'com.android.support:support-v4:19.1.0'
     compile 'com.google.android.gms:play-services:+'
+    compile 'com.joanzapata.android:android-iconify:1.0.9'
+    //compile 'com.github.ksoichiro:android-observablescrollview:1.5.2'
     compile files('libs/core.jar')
 }

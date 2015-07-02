@@ -10,6 +10,10 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.ListView;
 
+import com.sevenre.trackre.vehicle.R;
+import com.sevenre.trackre.vehicle.views.lib.SimpleHeaderRecyclerAdapter;
+import com.sevenre.trackre.vehicle.views.lib.SimpleRecyclerAdapter;
+
 import java.util.ArrayList;
 
 public abstract class BaseActivity extends AppCompatActivity {
@@ -18,7 +22,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected int getActionBarSize() {
         TypedValue typedValue = new TypedValue();
-        int[] textSizeAttr = new int[]{com.sevenre.trackre.vehicle.R.attr.actionBarSize};
+        int[] textSizeAttr = new int[]{R.attr.actionBarSize};
         int indexOfAttrTextSize = 0;
         TypedArray a = obtainStyledAttributes(typedValue.data, textSizeAttr);
         int actionBarSize = a.getDimensionPixelSize(indexOfAttrTextSize, -1);
@@ -85,7 +89,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected void setDummyData(RecyclerView recyclerView, int num) {
-        //recyclerView.setAdapter(new SimpleRecyclerAdapter(this, getDummyData(num)));
+        recyclerView.setAdapter(new SimpleRecyclerAdapter(this, getDummyData(num)));
     }
 
     protected void setDummyDataWithHeader(RecyclerView recyclerView, int headerHeight) {
@@ -98,7 +102,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected void setDummyDataWithHeader(RecyclerView recyclerView, View headerView) {
-        //recyclerView.setAdapter(new SimpleHeaderRecyclerAdapter(this, getDummyData(), headerView));
+        recyclerView.setAdapter(new SimpleHeaderRecyclerAdapter(this, getDummyData(), headerView));
     }
 }
-

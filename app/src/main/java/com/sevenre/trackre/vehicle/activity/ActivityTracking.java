@@ -24,7 +24,6 @@ import com.nineoldandroids.view.ViewHelper;
 import com.sevenre.trackre.vehicle.R;
 import com.sevenre.trackre.vehicle.database.LiveDatabaseHandler;
 import com.sevenre.trackre.vehicle.datatypes.Stop;
-import com.sevenre.trackre.vehicle.datatypes.TaggingStop;
 import com.sevenre.trackre.vehicle.fragment.FragmentAttendance;
 import com.sevenre.trackre.vehicle.fragment.FragmentTracking;
 import com.sevenre.trackre.vehicle.utils.SharedPreference;
@@ -41,7 +40,8 @@ import com.nineoldandroids.animation.ValueAnimator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActivityTracking extends BaseActivity implements ObservableScrollViewCallbacks {
+public class ActivityTracking
+        extends BaseActivity implements ObservableScrollViewCallbacks {
 
     private View mToolbarView;
     private TouchInterceptionFrameLayout mInterceptionLayout;
@@ -50,7 +50,7 @@ public class ActivityTracking extends BaseActivity implements ObservableScrollVi
     private int mSlop;
     private boolean mScrolled;
     private ScrollState mLastScrollState;
-    private TextView nextName, scheduleTime, varianceTime;
+    private TextView nextName, scheduleTime;
     BroadcastReceiver receiver;
     List<Stop> stops = new ArrayList<Stop>();
 
@@ -74,7 +74,7 @@ public class ActivityTracking extends BaseActivity implements ObservableScrollVi
 
         SlidingTabLayout slidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
         slidingTabLayout.setCustomTabView(R.layout.tab_indicator, android.R.id.text1);
-        slidingTabLayout.setSelectedIndicatorColors(getResources().getColor(R.color.accent));
+        slidingTabLayout.setSelectedIndicatorColors(getResources().getColor(R.color.white));
         slidingTabLayout.setDistributeEvenly(true);
         slidingTabLayout.setViewPager(mPager);
 
@@ -100,7 +100,6 @@ public class ActivityTracking extends BaseActivity implements ObservableScrollVi
             };
             nextName = (TextView)findViewById(R.id.tracking_next_stop_name);
             scheduleTime = (TextView)findViewById(R.id.tracking_next_stop_scheduled_time);
-            varianceTime = (TextView)findViewById(R.id.tracking_next_stop_variance_time);
 
             LiveDatabaseHandler db = new LiveDatabaseHandler(getApplicationContext());
             stops = db.getTimeTable();

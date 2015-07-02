@@ -18,9 +18,7 @@
         android:name="android.hardware.touchscreen"
         android:required="false" />
 
-    <permission
-        android:name="com.sevenre.trackre.vehicle.permission.MAPS_RECEIVE"
-        android:protectionLevel="signature" />
+    <user-permission android:name="com.sevenre.trackre.vehicle.permission.MAPS_RECEIVE" />
 
     <uses-feature
         android:glEsVersion="0x00020000"
@@ -60,13 +58,13 @@
             android:noHistory="true"
             android:screenOrientation="portrait" />
 
-
         <activity
             android:name="com.sevenre.trackre.vehicle.activity.ActivityTagging"
             android:label="@string/activity_tagging"
             android:parentActivityName="com.sevenre.trackre.vehicle.activity.ActivityHome"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Toolbar"/>
+
         <activity
             android:name="com.sevenre.trackre.vehicle.qrcode.CaptureActivity"
             android:configChanges="orientation|keyboardHidden"
@@ -111,7 +109,7 @@
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyDdHQVSNdFLAunCmHbBVnuipoDm4a2184k" />
+            android:value="AIzaSyBBzNRTmBrxSQAlaYZGe27LZ_v-mhpsO08" />
     </application>
 
 </manifest>
