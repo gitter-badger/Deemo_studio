@@ -3,6 +3,10 @@ package com.sevenre.trackre.vehicle.utils;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 
+import com.sevenre.trackre.vehicle.datatypes.Bus;
+
+import java.util.List;
+
 public class Constants {
 
 	//App control
@@ -27,4 +31,6 @@ public class Constants {
     public static final String TRIP = "com.sevenre.trackre.triptype";
 	public static final int TRIP_DROP = 1;
 	public static final int TRIP_PICK_UP = 2;
+
+	public static List<Bus> busList;
 }

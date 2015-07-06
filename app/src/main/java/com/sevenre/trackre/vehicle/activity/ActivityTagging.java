@@ -97,11 +97,11 @@ public class ActivityTagging extends ActionBarActivity implements OnClickListene
 
 		final Dialog dialog = new Dialog(this,android.R.style.Theme_Translucent_NoTitleBar);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        //dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setContentView(R.layout.coach_mark_tagging);
 		dialog.setCanceledOnTouchOutside(true);
-		//for dismissing anywhere you touch
 		View masterView = dialog.findViewById(R.id.coach_mark_master_view);
+		masterView.setAlpha(1.2f);
 		masterView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {

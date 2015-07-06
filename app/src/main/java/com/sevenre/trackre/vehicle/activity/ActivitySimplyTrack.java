@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.sevenre.trackre.vehicle.R;
@@ -83,7 +84,7 @@ public class ActivitySimplyTrack extends AppCompatActivity implements LocationLi
 	@Override
 	public void onLocationChanged(Location location) {
 		LatLng latlng = new LatLng(location.getLatitude(),location.getLongitude());
-		googleMap.addMarker(new MarkerOptions().position(latlng));
+		googleMap.addMarker(new MarkerOptions().position(latlng).flat(true));
 		googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng,googleMap.getCameraPosition().zoom));
 	}
 	

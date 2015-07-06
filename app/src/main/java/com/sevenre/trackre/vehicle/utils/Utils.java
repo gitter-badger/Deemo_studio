@@ -36,9 +36,6 @@ public class Utils {
 	public static final int roboto = 1;
 	public static final int robotoCondensed = 2;
 	public static final int helvetica = 3;
-	public static final int gothic = 4;
-	public static final int gothicLight = 5;
-	public static final int erasBold = 6;
 
 	//audio notification
 	public static final int no_internet = 1;
@@ -81,14 +78,8 @@ public class Utils {
 		case helvetica:
 			t = Typeface.createFromAsset(assets, "fonts/roboto.ttf");
 			break;
-		case gothic:
-			t = Typeface.createFromAsset(assets, "fonts/gothi720bt.ttf");
-			break;
-		case gothicLight:
-			t = Typeface.createFromAsset(assets, "fonts/gothic720ltbtlight.ttf");
-			break;
-		case erasBold:
-			t = Typeface.createFromAsset(assets, "fonts/erasBold.TTF");
+		default:
+			t = Typeface.createFromAsset(assets, "fonts/roboto.ttf");
 			break;
 		}
 		return t;

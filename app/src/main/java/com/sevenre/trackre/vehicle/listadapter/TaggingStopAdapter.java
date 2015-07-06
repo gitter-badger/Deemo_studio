@@ -66,24 +66,32 @@ public class TaggingStopAdapter extends BaseAdapter implements android.widget.Ad
 			vi.findViewById(R.id.route_line_bottom).setBackgroundColor(Color.TRANSPARENT);;
 		}
 
-		//TextView route_no = (TextView) vi.findViewById(R.id.active_trip_next_stop_no);
 		TextView time = (TextView) vi.findViewById(R.id.active_trip_next_stop_time);
 		TextView name = (TextView) vi.findViewById(R.id.active_trip_next_stop_name);
-		
-		//route_no.setTypeface(Utils.getTypeFace(activity.getAssets(), Utils.robotoCondensed));
+
 		time.setTypeface(Utils.getTypeFace(activity.getAssets(), Utils.roboto));
 		name.setTypeface(Utils.getTypeFace(activity.getAssets(), Utils.roboto));
 		
 		TaggingStop t = (TaggingStop) data.get(position);
-		//route_no.setText(""+(Integer.parseInt(t.getNo())-1));
 		time.setText(t.getTime().substring(0,5));
 		name.setText(t.getName());
 		
 		if (t.isTagged()) {
-			//route_no.setTextColor(resources.getColor(R.color.orange_light));
-			time.setTextColor(resources.getColor(R.color.orange_light));
-			name.setTextColor(resources.getColor(R.color.orange_light));
-			//vi.findViewById(R.id.list_item_tagging_line).setBackgroundColor(resources.getColor(R.color.orange_light));
+
+			time.setTextColor(resources.getColor(R.color.primary));
+			name.setTextColor(resources.getColor(R.color.primary));
+			vi.findViewById(R.id.route_line_circle).setBackgroundDrawable(activity.getResources().getDrawable(R.drawable.route_line_round_background_tagged));
+
+            vi.findViewById(R.id.route_line_top).setBackgroundColor(activity.getResources().getColor(R.color.primary_light));
+            vi.findViewById(R.id.route_line_bottom).setBackgroundColor(activity.getResources().getColor(R.color.primary_light));
+
+
+            if (position == 0) {
+				vi.findViewById(R.id.route_line_top).setBackgroundColor(Color.TRANSPARENT);
+			}
+			if (position == data.size()-1) {
+				vi.findViewById(R.id.route_line_bottom).setBackgroundColor(Color.TRANSPARENT);;
+			}
 		}
 		return vi;
 	}

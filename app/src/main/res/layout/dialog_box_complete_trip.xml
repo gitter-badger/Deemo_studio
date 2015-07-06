@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
             android:textSize="@dimen/dialog_content_textsize"
+            android:textColor="@color/secondary_text"
             android:layout_marginBottom="@dimen/dialog_content_padding_bottom"
             android:text="Verify start time of trip and current time. To start trip enter your personal PIN in box below"
             android:layout_gravity="center_horizontal"

@@ -2,24 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_blue"
+    android:background="@color/primary"
     android:gravity="center"
     android:orientation="vertical" >
 
-    <ImageView
-        android:id="@+id/home_track_re_icon"
-        android:layout_width="fill_parent"
-        android:layout_height="45dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginBottom="15dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="15dp"
-        android:src="@drawable/icon_track_re_home" />
-
     <GridView
         android:id="@+id/home_screen_grid_view"
-        android:layout_below="@+id/home_track_re_icon"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
         android:layout_above="@+id/footer"
         android:layout_width="fill_parent"
         android:numColumns="2"
@@ -27,11 +17,12 @@
 
     <LinearLayout
         android:id="@+id/footer"
+        android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/accent_material_light"
-        android:gravity="center" >
+        android:background="@android:color/black"
+        android:gravity="center">
 
         <TextView
             android:id="@+id/school_info_home_screen"
@@ -44,7 +35,7 @@
             android:singleLine="true"
             android:text="Welcome"
             android:textAlignment="center"
-            android:textColor="@color/primary_light"
+            android:textColor="@color/white"
             android:textSize="16dp" />
     </LinearLayout>
 

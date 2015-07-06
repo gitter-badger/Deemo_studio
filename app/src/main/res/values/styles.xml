@@ -44,6 +44,10 @@
         <item name="android:paddingRight">@dimen/dialog_button_textpadding_horizontal</item>
     </style>
 
+    <style name="AppTheme.ProgressDialog" parent="Animation.AppCompat.Dialog">
+
+    </style>
+
     <!--<style name="EditTextCustomHolo" parent="android:Widget.EditText">-->
         <!--<item name="android:background">@drawable/apptheme_edit_text_holo_light</item>-->
         <!--<item name="android:textColor">#ffffff</item>-->

@@ -32,7 +32,7 @@ import com.sevenre.trackre.vehicle.utils.view.VehicleIdDialogBox;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActivityHome extends Activity implements OnClickListener {
+public class ActivityHome extends Activity  {
 
 	View pick, drop, setting, simply_track, other_info;
 	AlertDialog.Builder builder;
@@ -51,90 +51,16 @@ public class ActivityHome extends Activity implements OnClickListener {
 	}
 
 	private void setUpUI() {
-//		pick = findViewById(R.id.home_pick_up);
-//		drop = findViewById(R.id.home_drop);
-//
-//		simply_track = findViewById(R.id.home_just_track);
-//		other_info = findViewById(R.id.home_other_info);
-//
-//		pick.setOnClickListener(ActivityHome.this);
-//		drop.setOnClickListener(ActivityHome.this);
-//
-//		other_info.setOnClickListener(ActivityHome.this);
-//		simply_track.setOnClickListener(ActivityHome.this);
-
         gridView = (GridView)findViewById(R.id.home_screen_grid_view);
         gridView.setAdapter(new GridAdapter());
-
 		TextView tv = (TextView)findViewById(R.id.school_info_home_screen);
-		tv.setText(SharedPreference.getSchoolName(mContext) + ", " + SharedPreference.getSchoolCity(mContext));
+		tv.setText("TrackRE  |  " + SharedPreference.getSchoolName(mContext) + ", " + SharedPreference.getSchoolCity(mContext));
 		tv.setMovementMethod(new ScrollingMovementMethod());
 		tv.setTypeface(Utils.getTypeFace(getAssets(), Utils.roboto));
 	}
 
 	
-	
-	@Override
-	public void onClick(View v) {
-//		Intent i = new Intent();
-//		switch (v.getId()) {
-//		case R.id.home_drop:
-//			if(Utils.isServiceRunning(getApplicationContext())) {
-//				i.setClass(ActivityHome.this, MainActivity.class);
-//				startActivity(i);
-//			} else if (Utils.isTaggingServiceRunning(getApplicationContext())) {
-//				i.setClass(ActivityHome.this, ActivityTagging.class);
-//				startActivity(i);
-//			}else {
-//				if (NetworkConnectivity.isConnectedToInternet(getApplicationContext())) {
-//					i.setClass(ActivityHome.this, ActivitySelectTrip.class);
-//					i.putExtra(Constants.TRIP, Constants.TRIP_DROP);
-//					if (dialog!=null)
-//						if (dialog.isShowing())
-//							dialog.dismiss();
-//					dialog = new VehicleIdDialogBox(ActivityHome.this,i);
-//					dialog.show();
-//				}
-//				else {
-//					Toast.makeText(getApplicationContext(), R.string.no_internet, Toast.LENGTH_SHORT).show();
-//					break;
-//				}
-//			}
-//			break;
-//		case R.id.home_pick_up:
-//			if(Utils.isServiceRunning(getApplicationContext())) {
-//				i.setClass(ActivityHome.this, MainActivity.class);
-//				startActivity(i);
-//			} else if (Utils.isTaggingServiceRunning(getApplicationContext())) {
-//				i.setClass(ActivityHome.this, ActivityTagging.class);
-//				startActivity(i);
-//			} else {
-//				if (NetworkConnectivity.isConnectedToInternet(getApplicationContext())) {
-//					i.setClass(ActivityHome.this, ActivitySelectTrip.class);
-//					i.putExtra(Constants.TRIP, Constants.TRIP_PICK_UP);
-//					if (dialog!=null)
-//						if (dialog.isShowing())
-//							dialog.dismiss();
-//					dialog = new VehicleIdDialogBox(ActivityHome.this,i);
-//					dialog.show();
-//
-//				}
-//				else {
-//					Toast.makeText(getApplicationContext(), R.string.no_internet, Toast.LENGTH_SHORT).show();
-//					break;
-//				}
-//			}
-//			break;
-//		case R.id.home_just_track:
-//			i.setClass(ActivityHome.this, ActivitySimplyTrack.class);
-//			startActivity(i);
-//			break;
-//		case R.id.home_other_info:
-//			i.setClass(ActivityHome.this, ActivityOtherInfo.class);
-//			startActivity(i);
-//			break;
-//		}
-	}
+
 	
 	@Override
 	protected void onResume() {
@@ -179,9 +105,9 @@ public class ActivityHome extends Activity implements OnClickListener {
         public GridAdapter() {
             data = new ArrayList<>();
             data.add(new IconData(Iconify.IconValue.fa_home,"Drop"));
-            data.add(new IconData(Iconify.IconValue.fa_hospital_o,"Pick UP"));
+            data.add(new IconData(Iconify.IconValue.fa_hospital_o,"Pick Up"));
             data.add(new IconData(Iconify.IconValue.fa_map_marker,"Simply Track"));
-            data.add(new IconData(Iconify.IconValue.fa_group,"Attendance"));
+            data.add(new IconData(Iconify.IconValue.fa_search,"Attendance"));
             data.add(new IconData(Iconify.IconValue.fa_briefcase,"Extras"));
             data.add(new IconData(Iconify.IconValue.fa_cog,"Settings"));
 
@@ -211,10 +137,12 @@ public class ActivityHome extends Activity implements OnClickListener {
             IconTextView icon = (IconTextView) view.findViewById(R.id.icon_home_icon);
             icon.setText(data.get(pos).icon.formattedName());
             icon.setTextSize(75);
+            icon.setTextColor(getResources().getColor(R.color.white));
             Iconify.addIcons(icon);
 
             TextView text = (TextView)view.findViewById(R.id.icon_home_text);
             text.setText(data.get(pos).name);
+            text.setTextColor(getResources().getColor(R.color.white));
             view.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -234,7 +162,7 @@ public class ActivityHome extends Activity implements OnClickListener {
                                     if (dialog != null)
                                         if (dialog.isShowing())
                                             dialog.dismiss();
-                                    dialog = new VehicleIdDialogBox(ActivityHome.this, i);
+                                    dialog = new VehicleIdDialogBox(ActivityHome.this, i,getFragmentManager());
                                     dialog.show();
                                 } else {
                                     Toast.makeText(getApplicationContext(), R.string.no_internet, Toast.LENGTH_SHORT).show();
@@ -256,7 +184,7 @@ public class ActivityHome extends Activity implements OnClickListener {
                                     if (dialog != null)
                                         if (dialog.isShowing())
                                             dialog.dismiss();
-                                    dialog = new VehicleIdDialogBox(ActivityHome.this, i);
+                                    dialog = new VehicleIdDialogBox(ActivityHome.this, i, getFragmentManager());
                                     dialog.show();
 
                                 } else {

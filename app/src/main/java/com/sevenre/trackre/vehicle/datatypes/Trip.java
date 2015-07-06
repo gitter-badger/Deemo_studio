@@ -5,17 +5,17 @@ import java.text.SimpleDateFormat;
 
 public class Trip {
 
-	String name, time, type, displayName, tripId, tripStatus;
+	String name, time, type, tripDescription, tripId, tripStatus;
 	boolean isTagged;
 
-	public Trip(String tripId, String name, String time, String displayName,
+	public Trip(String tripId, String name, String time, String tripDescription,
 			String type, String tripStatus, boolean isTagged) {
 		super();
 		this.tripId = tripId;
 		this.name = name;
 		this.time = time;
 		this.type = type;
-		this.displayName = displayName;
+		this.tripDescription = tripDescription;
 		this.isTagged = isTagged;
 		this.tripStatus = tripStatus;
 	}
@@ -80,11 +80,11 @@ public class Trip {
 		this.name = name;
 	}
 
-	public String getDisplayName() {
-		return displayName;
+	public String getTripDescription() {
+		return tripDescription;
 	}
 
-	public void setDisplayName(String displayName) {
-		this.displayName = displayName;
+	public void setTripDescription(String displayName) {
+		this.tripDescription = displayName;
 	}
 }

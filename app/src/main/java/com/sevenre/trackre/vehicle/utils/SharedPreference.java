@@ -10,7 +10,7 @@ public class SharedPreference {
 
 	public static String getVehicleId(Context c) {
 		SharedPreferences pref = c.getSharedPreferences(Utils.PREFERENCE, 0);
-		return pref.getString(Utils.VEHICLE_ID, null);
+		return pref.getString(Utils.VEHICLE_ID, "");
 	}
 
 	public static void setVehicleId(Context c, String vehicleId) {
@@ -22,7 +22,7 @@ public class SharedPreference {
 	
 	public static String getVehicleNo(Context c) {
 		SharedPreferences pref = c.getSharedPreferences(Utils.PREFERENCE, 0);
-		return pref.getString(Utils.VEHICLE_NO, null);
+		return pref.getString(Utils.VEHICLE_NO, "");
 	}
 
 	public static void setVehicleNo(Context c, String vehicleNo) {
@@ -121,7 +121,7 @@ public class SharedPreference {
 		try {
 			JSONObject object = new JSONObject(getSchoolInfo(c));
 			if (object.has("success")&& object.getBoolean("success")) {
-				return object.getJSONObject("data").getJSONObject("school").getString("name");
+				return object.getJSONObject("data").getJSONObject("school").getString("schoolName");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -134,7 +134,7 @@ public class SharedPreference {
 		try {
 			JSONObject object = new JSONObject(getSchoolInfo(c));
 			if (object.has("success")&& object.getBoolean("success")) {
-				return object.getJSONObject("data").getJSONObject("school").getString("city");
+				return object.getJSONObject("data").getJSONObject("school").getString("schoolLocality");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

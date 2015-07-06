@@ -128,23 +128,17 @@ public class StartTripDialogBox extends Dialog implements android.view.View.OnCl
 				if (stops.size()>0) {
 					LiveDatabaseHandler db = new LiveDatabaseHandler(mContext.getApplicationContext());
 					db.updateTimeTable(stops);
-				} 
+				}
 				SharedPreference.setTripId(mContext, tripId);
 				SharedPreference.setTripStatus(mContext, t.getTripStatus());
 				SharedPreference.setPassCode(mContext, Integer.parseInt(passcode));
 				SharedPreference.setDriverId(mContext, driverId);
 				mContext.startActivity(i);
+
 				mContext.startService(s);
-
-				Handler handler = new Handler();
-				handler.postDelayed(new Runnable() {
-					public void run() {
-						if(dialog!=null)
-							if(dialog.isShowing())
-								dialog.dismiss();
-					}
-				}, 3000);
-
+				if(dialog!=null)
+					if(dialog.isShowing())
+						dialog.dismiss();
 
 			} else {
 				if (driverId<0) {

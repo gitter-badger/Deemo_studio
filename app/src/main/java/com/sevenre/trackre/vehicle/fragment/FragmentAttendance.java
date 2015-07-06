@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.IconTextView;
 
+import com.joanzapata.android.iconify.Iconify;
 import com.sevenre.trackre.vehicle.R;
 import com.sevenre.trackre.vehicle.qrcode.CaptureActivity;
 
@@ -21,8 +23,15 @@ public class FragmentAttendance extends Fragment{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		rootView = inflater.inflate(R.layout.fragment_attendance, container,false);
+		rootView = inflater.inflate(R.layout.fragment_attendance, container, false);
 		scan_button = rootView.findViewById(R.id.attendance_scan_stundent_id);
+		int size = scan_button.getHeight();
+		IconTextView view = (IconTextView)rootView.findViewById(R.id.attendance_scan_stundent_id);
+		view.setText(Iconify.IconValue.fa_search.formattedName());
+		view.setTextSize(190);
+
+		Iconify.addIcons(view);
+
 		scan_button.setOnClickListener(new OnClickListener() {
 			
 			@Override

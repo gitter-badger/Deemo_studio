@@ -51,8 +51,6 @@ public class ActivityAuthenticate extends Activity implements OnClickListener{
 		schoolId.setFilters(new InputFilter[] {new InputFilter.AllCaps()});
 		enter.setOnClickListener(ActivityAuthenticate.this);
 		enter.setText("Authenticate");
-		schoolId.setTypeface(Utils.getTypeFace(getAssets(),Utils.roboto));
-		enter.setTypeface(Utils.getTypeFace(getAssets(),Utils.roboto));
 	}
 	
 	@Override

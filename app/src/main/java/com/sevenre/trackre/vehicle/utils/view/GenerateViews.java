@@ -8,15 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.sevenre.trackre.vehicle.R;
+
 public class GenerateViews {
 
-	public static ProgressDialog getProgressDialog (Context context,
-			String title, String msg) {
+	public static ProgressDialog getProgressDialog (Context context, String title, String msg) {
 		ProgressDialog dialog = new ProgressDialog(context);
 		dialog.setTitle(title);
 		dialog.setMessage(msg);
 		dialog.setCancelable(false);
-		//dialog.setProgressStyle(android.R.style.Widget_ProgressBar_Small);
+		//dialog.setProgressStyle(R.style.AppTheme_ProgressDialog);
 		return dialog;
 	}
 	

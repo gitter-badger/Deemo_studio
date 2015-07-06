@@ -104,8 +104,7 @@
             android:focusable="false"
             android:onClick="taggingOnClick"
             android:scaleType="fitCenter"
-            android:background="@drawable/icon_add_stop_background"
-            android:src="@drawable/icon_add_stop" />
+            android:background="@drawable/icon_add_stop_background" />
     </LinearLayout>
 
 </LinearLayout>

@@ -29,14 +29,20 @@ public class InfoDatabaseHandler  extends SQLiteOpenHelper {
 		
 	}
 
-	public static List<Contact> getContactInfo() {
-		List<Contact> contacts = new ArrayList<Contact>();
-		contacts.add(new Contact("Track RE", "+4915163005818"));
-		contacts.add(new Contact("Pratip", "+4917624325146"));
-		contacts.add(new Contact("Neeraj", "+4917684304578"));
+	public static List<Contact> getContactInfoSchool() {
+		List<Contact> contacts = new ArrayList<>();
 		contacts.add(new Contact("Principal", "+4915163005818"));
-		contacts.add(new Contact("Ambulance", "111"));
+		contacts.add(new Contact("Admin", "+4915163005818"));
+		return contacts;
+	}
+
+	public static List<Contact> getContactInfoEmergency() {
+		List<Contact> contacts = new ArrayList<>();
+		contacts.add(new Contact("Track RE", "+4915163005818"));;
+		contacts.add(new Contact("Ambulance", "108"));
 		contacts.add(new Contact("Fire", "101"));
+		contacts.add(new Contact("Police", "100"));
 		return contacts;
 	}
 }
+

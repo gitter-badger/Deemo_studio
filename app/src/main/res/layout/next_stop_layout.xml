@@ -9,8 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:padding="5dp">
+        android:gravity="center_vertical">
 
         <TextView
             android:layout_width="wrap_content"
@@ -20,16 +19,6 @@
             android:textColor="@color/primary_light"
             android:id="@+id/textView" />
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="04:34 PM"
-            android:gravity="end"
-            android:paddingRight="10dp"
-            android:textColor="@color/white"
-            android:id="@+id/tracking_next_stop_scheduled_time" />
-
     </LinearLayout>
 
     <TextView
@@ -38,10 +27,18 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="36dp"
         android:text="Mayur Vihar Phase 1"
-        android:padding="5dp"
         android:textColor="@color/white"
         android:singleLine="true"
         android:id="@+id/tracking_next_stop_name" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="04:34 PM"
+        android:paddingRight="10dp"
+        android:textColor="@color/primary_light"
+        android:id="@+id/tracking_next_stop_scheduled_time" />
 
 
 </LinearLayout>

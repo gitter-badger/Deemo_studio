@@ -93,7 +93,7 @@ public class TrackService extends Service implements LocationListener {
 		public void onReceive(Context context, Intent intent) {
 
 			final String status = intent.getStringExtra(Utils.STATUS);
-			if (status.contains("STOP")) {
+			if (status.contains("STOP")||status.contains("CANCEL")) {
 				unregisterReceiver(mStatusReceiver);
 				//isTagging = false;
 				killService =true;

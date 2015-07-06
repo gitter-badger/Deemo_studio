@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -40,8 +42,8 @@ public class OtherInfoExpandableListAdapter extends BaseExpandableListAdapter {
 		this.activity = activity;
 		this.inflater = LayoutInflater.from(activity.getApplicationContext());
 		parkStop = new ArrayList<ParkStop>();
-		schoolContact = InfoDatabaseHandler.getContactInfo();
-		emergencyContact = InfoDatabaseHandler.getContactInfo();
+		schoolContact = InfoDatabaseHandler.getContactInfoSchool();
+		emergencyContact = InfoDatabaseHandler.getContactInfoEmergency();
 		new GetParkStation().execute(SharedPreference.getSchoolId(activity));
 	}
 	
@@ -86,19 +88,30 @@ public class OtherInfoExpandableListAdapter extends BaseExpandableListAdapter {
 		case 1 : // school contact
 			resultView = inflater.inflate(R.layout.list_item_contact, null);
 			TextView name = (TextView) resultView.findViewById(R.id.name);
-			name.setTypeface(Utils.getTypeFace(activity.getAssets(), Utils.roboto));
 			TextView no = (TextView) resultView.findViewById(R.id.contact_no);
 			name.setText(schoolContact.get(childPosition).getName());
-			no.setTypeface(Utils.getTypeFace(activity.getAssets(), Utils.roboto));
 			no.setText(schoolContact.get(childPosition).getPhoneNumber());
 			resultView.setOnClickListener(new OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
-					
-					Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + schoolContact.get(childPosition).getPhoneNumber()));
-					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					activity.startActivity(intent);
+
+                    new AlertDialog.Builder(activity)
+                            .setTitle("Call " + schoolContact.get(childPosition).getName()+"?")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + schoolContact.get(childPosition).getPhoneNumber()));
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    activity.startActivity(intent);
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            })
+                            .show();
 					
 				}
 			});
@@ -107,18 +120,33 @@ public class OtherInfoExpandableListAdapter extends BaseExpandableListAdapter {
 		case 2 : // emergency contact
 			resultView = inflater.inflate(R.layout.list_item_contact, null);
 			TextView name1 = (TextView) resultView.findViewById(R.id.name);
-			name1.setTypeface(Utils.getTypeFace(activity.getAssets(), Utils.roboto));
 			TextView no2 = (TextView) resultView.findViewById(R.id.contact_no);
-			name1.setText(schoolContact.get(childPosition).getName());
-			no2.setTypeface(Utils.getTypeFace(activity.getAssets(), Utils.roboto));
-			no2.setText(schoolContact.get(childPosition).getPhoneNumber());
+			name1.setText(emergencyContact.get(childPosition).getName());
+
+			no2.setText(emergencyContact.get(childPosition).getPhoneNumber());
 			resultView.setOnClickListener(new OnClickListener() {
 				
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + emergencyContact.get(childPosition).getPhoneNumber()));
-					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					activity.startActivity(intent);					
+
+                    new AlertDialog.Builder(activity)
+                            .setTitle("Call " + emergencyContact.get(childPosition).getName()+"?")
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + emergencyContact.get(childPosition).getPhoneNumber()));
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    activity.startActivity(intent);
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            })
+                            .show();
+
+
 				}
 			});
 			return resultView;

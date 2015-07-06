@@ -17,40 +17,79 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:paddingLeft="@dimen/dialog_frame_margin"
-        android:paddingRight="@dimen/dialog_frame_margin"
-        android:paddingTop="@dimen/dialog_content_padding_top"
-        android:paddingBottom="@dimen/dialog_content_padding_bottom" >
+        android:layout_weight="1">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:textSize="@dimen/dialog_content_textsize"
-            android:layout_marginBottom="@dimen/dialog_content_padding_bottom"
-            android:text="Enter your vehile no and get trips attached to this vehicle "
-            android:layout_gravity="center_horizontal"
-            tools:ignore="UnusedAttribute" />
-
-        <EditText
-            android:id="@+id/dialog_box_vehicle_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/primary_text"
-            android:textAlignment="center"
-            android:gravity="center"
-            android:singleLine="true"
-            android:backgroundTint="@color/primary"
-            android:hint="HR 3 K 1434"
-            android:layout_marginBottom="10dp">
-            <requestFocus />
-        </EditText>
-
-
-        <include layout="@layout/dialog_footer"
+        <LinearLayout
+            android:id="@+id/dialog_box_yes"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp"
+            android:padding="5dp">
 
+            <IconTextView
+                android:id="@+id/dialog_box_icon_yes"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:textColor="@color/secondary_text"/>
+
+            <TextView
+                android:id="@+id/dialog_box_vehicle_id"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:textColor="@color/secondary_text"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/dialog_box_select_bus"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <IconTextView
+                android:id="@+id/dialog_box_icon_select_bus"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:textColor="@color/secondary_text"/>
+
+            <TextView
+                android:text="Select Vehicle"
+                android:layout_width="fill_parent"
+                android:textColor="@color/secondary_text"
+                android:layout_height="fill_parent"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/dialog_box_no"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <IconTextView
+                android:id="@+id/dialog_box_icon_no"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:gravity="center"
+                android:textColor="@color/secondary_text"/>
+
+            <TextView
+                android:text="Cancel"
+                android:textColor="@color/secondary_text"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="10dp"/>
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
