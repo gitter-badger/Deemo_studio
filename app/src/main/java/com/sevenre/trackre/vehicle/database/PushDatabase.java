@@ -20,6 +20,7 @@ public class PushDatabase extends AsyncTask<Context, Integer, Void>{
 	
 	@Override
 	protected Void doInBackground(Context... params) {
+		Log.e("PushDatabase + start pushing data");
 		context = params[0];
 		db = new LiveDatabaseHandler(context);
 		if (Looper.myLooper()==null) {
@@ -62,11 +63,12 @@ public class PushDatabase extends AsyncTask<Context, Integer, Void>{
 		
 		if (NetworkConnectivity.isConnectedToInternet(context)) {
 			for (String[] o :act) {
-				if (Server.completeTrip(o[1], o[2], o[4], o[3], o[5], o[6], o[7], o[8], 0,false)) { //set driverid in db
-					keys.add(o[0]);
-				} else if (NetworkConnectivity.isConnectedToInternet(context)){
-					break;
-				}
+				//ToDo Change Database for compelte trip
+//				if (Server.completeTrip(o[1], o[2], o[4], o[3], o[5], o[6], o[7], o[8], 0,false)) { //set driverid in db
+//					keys.add(o[0]);
+//				} else if (NetworkConnectivity.isConnectedToInternet(context)){
+//					break;
+//				}
 			}
 		}
 		

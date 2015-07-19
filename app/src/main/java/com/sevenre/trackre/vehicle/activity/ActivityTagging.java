@@ -18,7 +18,9 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
 import com.sevenre.trackre.vehicle.R;
 import com.sevenre.trackre.vehicle.database.LiveDatabaseHandler;
 import com.sevenre.trackre.vehicle.datatypes.TaggingStop;
@@ -35,17 +37,30 @@ public class ActivityTagging extends ActionBarActivity implements OnClickListene
 	
 	ArrayList<TaggingStop> result;
 	ListView lv;
-	Context context;
+	Context mContext;
 	Dialog dialog;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tagging);
-		context = getApplicationContext();
+		mContext = getApplicationContext();
 		setUpUI();
 	}
-	
+
+	@Override
+	protected void onStart() {
+		super.onStart();
+		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+	}
+
+
 	private void setUpUI() {
 		lv = (ListView)findViewById(R.id.tagging_list_view);
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -54,6 +69,10 @@ public class ActivityTagging extends ActionBarActivity implements OnClickListene
 		if (ab != null) {
 			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		}
+
+		TextView title = ((TextView)findViewById(R.id.select_trip_title));
+		title.setText(SharedPreference.getSchoolName(mContext) + " / "+SharedPreference.getVehicleNo(mContext));
+		title.setTypeface(Utils.getTypeFace(getAssets(),Utils.roboto));
 
 //		((ImageButton)findViewById(R.id.tagging_add_new_stop)).setEnabled(false);
 //		Calendar c = Calendar.getInstance();
@@ -175,7 +194,7 @@ public class ActivityTagging extends ActionBarActivity implements OnClickListene
 
 		@Override
 		protected ArrayList<TaggingStop> doInBackground(String... arg0) {
-			return Server.getTaggingStopList(SharedPreference.getTripId(context), SharedPreference.getSchoolId(context));
+			return Server.getTaggingStopList(SharedPreference.getTripId(mContext), SharedPreference.getSchoolId(mContext));
 		}
 
 		@Override
@@ -187,7 +206,7 @@ public class ActivityTagging extends ActionBarActivity implements OnClickListene
 	
 	@Override
 	protected void onResume() {
-		if (!NetworkConnectivity.isGPSConnected(context)){
+		if (!NetworkConnectivity.isGPSConnected(mContext)){
 			AlertDialog.Builder builder = new AlertDialog.Builder(ActivityTagging.this);
 			builder.setTitle("No GPS not found");
 			builder.setMessage("Please start your GPS");
@@ -203,7 +222,7 @@ public class ActivityTagging extends ActionBarActivity implements OnClickListene
 					dialog.cancel();
 			builder.create().show();
 		}
-		result = (new LiveDatabaseHandler(context)).getTaggingTimeTable();
+		result = (new LiveDatabaseHandler(mContext)).getTaggingTimeTable();
 		for (TaggingStop o : result )
 		{
 			if (o.isTagged()) {

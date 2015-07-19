@@ -31,6 +31,7 @@ public class CompleteDialogBox extends Dialog implements android.view.View.OnCli
 	String msg;
 	ProgressDialog dialog;
 	EditText driverPin;
+	String schoolId, vehicleId;
 
 	public CompleteDialogBox(Activity a, String msg) {
 		super(a);
@@ -51,13 +52,14 @@ public class CompleteDialogBox extends Dialog implements android.view.View.OnCli
 		TextView tv  = (TextView) findViewById(R.id.dialog_box_title);
 		tv.setText("Complete Trip?");
 		driverPin = (EditText)findViewById(R.id.dialog_box_driver_pin);
+		schoolId = SharedPreference.getSchoolId(a);
+		vehicleId = SharedPreference.getVehicleId(a);
 	}
 
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.dialog_box_yes:
-			
 			Intent statusIntent = new Intent(Utils.STATUS_CHANGED_INTENT);
 			statusIntent.putExtra(Utils.STATUS, "STOP");
 			a.sendBroadcast(statusIntent);
@@ -102,7 +104,12 @@ public class CompleteDialogBox extends Dialog implements android.view.View.OnCli
 			tripId = SharedPreference.getTripId(a);
 			status = SharedPreference.getTripStatus(a);
 			driverId = SharedPreference.getDriverId(a);
-			return Server.completeTrip(tripId, status, stop.getTime(), stop.getDate(), ""+stop.getLat(), ""+stop.getLng(), ""+speed, "complete",driverId, true);
+//			public static boolean completeTrip(String tripId, String schoolId, String passcode,
+//				String time, String date, String lat, String lng, String speed, String activity, boolean isLive) {
+
+			return Server.completeTrip(tripId, schoolId, driverPin.getText().toString(),
+					stop.getServerTime(), stop.getDate(), ""+stop.getLat(), ""+stop.getLng(),
+					""+speed, "complete", true);
 		}
 		
 		@Override

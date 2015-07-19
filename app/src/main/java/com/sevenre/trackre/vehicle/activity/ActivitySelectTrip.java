@@ -16,11 +16,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.sevenre.trackre.vehicle.DriverApplication;
 import com.sevenre.trackre.vehicle.R;
 import com.sevenre.trackre.vehicle.datatypes.Trip;
 import com.sevenre.trackre.vehicle.listadapter.TripAdapter;
 import com.sevenre.trackre.vehicle.network.Server;
 import com.sevenre.trackre.vehicle.network.TaggingService;
+import com.sevenre.trackre.vehicle.network.TrackService;
 import com.sevenre.trackre.vehicle.utils.Constants;
 import com.sevenre.trackre.vehicle.utils.NetworkConnectivity;
 import com.sevenre.trackre.vehicle.utils.SharedPreference;
@@ -41,7 +44,7 @@ public class ActivitySelectTrip extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_trip);
         mContext = getApplicationContext();
-
+        ((DriverApplication) getApplication()).getTracker(DriverApplication.TrackerName.APP_TRACKER);
         TRIP = getIntent().getIntExtra(Constants.TRIP,1);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -79,6 +82,19 @@ public class ActivitySelectTrip extends AppCompatActivity {
         new GetTrip().execute();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        GoogleAnalytics.getInstance(this).reportActivityStart(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        GoogleAnalytics.getInstance(this).reportActivityStop(this);
+    }
+
+
     public void updateListView(ArrayList<Trip> results) {
         ListView lv = (ListView) findViewById(R.id.select_trip_list_view);
         //lv.setBackgroundColor(Color.parseColor("#dbdbdb"));
@@ -92,18 +108,20 @@ public class ActivitySelectTrip extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), R.string.no_internet, Toast.LENGTH_LONG).show();
                     return;
                 }
-                final Intent s = new Intent(ActivitySelectTrip.this, TaggingService.class);
+
                 if (dialog != null)
                     if (dialog.isShowing())
                         dialog.cancel();
                 StartTripDialogBox d;
                 Trip t = (Trip) result.get(position);
-                if (Constants.TRIP_DROP == TRIP/*t.getTripStatus().contains("track")*/) {
-                    final Intent i = new Intent(ActivitySelectTrip.this, ActivityTracking.class);
+                if (t.isTagged()) { //Constants.TRIP_DROP == TRIP/*t.getTripStatus().contains("track")*/
+                    Intent i = new Intent(ActivitySelectTrip.this, ActivityTracking.class);
+                    Intent s = new Intent(ActivitySelectTrip.this, TrackService.class);
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     d = new StartTripDialogBox(ActivitySelectTrip.this, i, s, t);
                 } else {
-                    final Intent i = new Intent(ActivitySelectTrip.this, ActivityTagging.class);
+                    Intent i = new Intent(ActivitySelectTrip.this, ActivityTagging.class);
+                    Intent s = new Intent(ActivitySelectTrip.this, TaggingService.class);
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     d = new StartTripDialogBox(ActivitySelectTrip.this, i, s, t);
                 }

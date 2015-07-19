@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.sevenre.trackre.vehicle.R;
 import com.sevenre.trackre.vehicle.datatypes.Stop;
+import com.sevenre.trackre.vehicle.utils.Log;
 import com.sevenre.trackre.vehicle.utils.Utils;
 
 public class NextStopAdapter extends BaseAdapter {
@@ -26,7 +27,7 @@ public class NextStopAdapter extends BaseAdapter {
 		data = new ArrayList<Stop>();
 		for (int i = 0; i < d.size(); i++) {
 			Stop s = d.get(i);
-			if ("RS".equalsIgnoreCase(s.getType())) 
+			if ("mid_stop".equalsIgnoreCase(s.getType()))
 				data.add(s);
 		}
 		activity = a;
@@ -35,9 +36,7 @@ public class NextStopAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		View vi = convertView;
-		vi = inflater.inflate(R.layout.list_item_active_trip_stop, null);
-
+		View vi = inflater.inflate(R.layout.list_item_active_trip_stop, null);
 		if (position == 0) {
 			vi.findViewById(R.id.route_line_top).setBackgroundColor(Color.TRANSPARENT);
 		}

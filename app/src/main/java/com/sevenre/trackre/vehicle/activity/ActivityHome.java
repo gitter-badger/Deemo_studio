@@ -19,7 +19,9 @@ import android.widget.IconTextView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
 import com.joanzapata.android.iconify.Iconify;
+import com.sevenre.trackre.vehicle.DriverApplication;
 import com.sevenre.trackre.vehicle.R;
 import com.sevenre.trackre.vehicle.database.PushDatabase;
 import com.sevenre.trackre.vehicle.qrcode.CaptureActivity;
@@ -34,7 +36,6 @@ import java.util.List;
 
 public class ActivityHome extends Activity  {
 
-	View pick, drop, setting, simply_track, other_info;
 	AlertDialog.Builder builder;
 	Dialog dialog;
 	Context mContext;
@@ -48,6 +49,7 @@ public class ActivityHome extends Activity  {
 		setContentView(R.layout.activity_home);
 		mContext = getApplicationContext();
 		setUpUI();
+        ((DriverApplication) getApplication()).getTracker(DriverApplication.TrackerName.APP_TRACKER);
 	}
 
 	private void setUpUI() {
@@ -59,10 +61,19 @@ public class ActivityHome extends Activity  {
 		tv.setTypeface(Utils.getTypeFace(getAssets(), Utils.roboto));
 	}
 
-	
+    @Override
+    protected void onStart() {
+        super.onStart();
+        GoogleAnalytics.getInstance(this).reportActivityStart(this);
+    }
 
-	
-	@Override
+    @Override
+    protected void onStop() {
+        super.onStop();
+        GoogleAnalytics.getInstance(this).reportActivityStop(this);
+    }
+
+    @Override
 	protected void onResume() {
 		super.onResume();
 		
@@ -74,8 +85,6 @@ public class ActivityHome extends Activity  {
 			startActivity(i);
 		}
 		if (!NetworkConnectivity.isConnectedToInternet(getApplicationContext())){
-			new PushDatabase().execute(getApplicationContext());
-			
 			builder = new AlertDialog.Builder(ActivityHome.this);
 			builder.setTitle("Network connectivity not found");
 			builder.setMessage("Please start your Data Plan");
@@ -95,7 +104,9 @@ public class ActivityHome extends Activity  {
 				if (dialog.isShowing())
 					dialog.dismiss();
 			dialog = builder.create();
-		}
+		} else {
+            new PushDatabase().execute(getApplicationContext());
+        }
 	}
 
     class GridAdapter extends BaseAdapter {
@@ -150,7 +161,7 @@ public class ActivityHome extends Activity  {
                     switch (pos) {
                         case 0:
                             if (Utils.isServiceRunning(getApplicationContext())) {
-                                i.setClass(ActivityHome.this, MainActivity.class);
+                                i.setClass(ActivityHome.this, ActivityTracking.class);
                                 startActivity(i);
                             } else if (Utils.isTaggingServiceRunning(getApplicationContext())) {
                                 i.setClass(ActivityHome.this, ActivityTagging.class);
@@ -172,7 +183,7 @@ public class ActivityHome extends Activity  {
                             break;
                         case 1:
                             if (Utils.isServiceRunning(getApplicationContext())) {
-                                i.setClass(ActivityHome.this, MainActivity.class);
+                                i.setClass(ActivityHome.this, ActivityTracking.class);
                                 startActivity(i);
                             } else if (Utils.isTaggingServiceRunning(getApplicationContext())) {
                                 i.setClass(ActivityHome.this, ActivityTagging.class);

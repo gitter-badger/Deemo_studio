@@ -3,10 +3,10 @@ package com.sevenre.trackre.vehicle.datatypes;
 public class BusPosition {
 
 	public static String  mDeviceId = "1111111";
-	public String mLat = "", mLng = "", mSpeed = "", mTime = "", mDate = "", tripId = "tripId", tripStatus = "tripStatus",id = "-1";
+	String mLat = "", mLng = "", mSpeed = "", mTime = "", mDate = "", tripId = "tripId", tripMode = "track",id = "-1";
 
 	public BusPosition(String mLat, String mLng, String mSpeed, String mTime,
-			String mDate, String tripId, String tripStatus) {
+			String mDate, String tripId, String tripMode) {
 		super();
 		this.mLat = mLat;
 		this.mLng = mLng;
@@ -14,7 +14,7 @@ public class BusPosition {
 		this.mTime = mTime;
 		this.mDate = mDate;
 		this.tripId = tripId;
-		this.tripStatus = tripStatus;
+		this.tripMode = tripMode;
 	}
 
 	public BusPosition() {
@@ -77,12 +77,12 @@ public class BusPosition {
 		this.mDate = mDate;
 	}
 
-	public String getTripStatus() {
-		return tripStatus;
+	public String getTripMode() {
+		return tripMode;
 	}
 
-	public void setTripStatus(String tripStatus) {
-		this.tripStatus = tripStatus;
+	public void setTripMode(String tripMode) {
+		this.tripMode = tripMode;
 	}
 
 	public String getId() {
@@ -95,7 +95,7 @@ public class BusPosition {
 	
 	@Override
 	public String toString() {
-		String result = getId() + " " + getTripId() + " " + getTripStatus() + " " + getDate() + " " + getTime() 
+		String result = getId() + " " + getTripId() + " " + getTripMode() + " " + getDate() + " " + getTime()
 				+ " " + getLat() + " " + getLng() + " " + getSpeed() ;
 		return result;
 	}

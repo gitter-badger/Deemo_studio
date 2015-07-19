@@ -27,6 +27,7 @@ import com.sevenre.trackre.vehicle.database.LiveDatabaseHandler;
 import com.sevenre.trackre.vehicle.datatypes.TaggingStop;
 import com.sevenre.trackre.vehicle.network.Server;
 import com.sevenre.trackre.vehicle.network.TrackService;
+import com.sevenre.trackre.vehicle.utils.Log;
 import com.sevenre.trackre.vehicle.utils.NetworkConnectivity;
 import com.sevenre.trackre.vehicle.utils.SharedPreference;
 import com.sevenre.trackre.vehicle.utils.Utils;
@@ -44,9 +45,12 @@ public class TaggingStopAdapter extends BaseAdapter implements android.widget.Ad
 		data = new ArrayList<TaggingStop>();
 		for (int i = 0; i < d.size(); i++) {
 			TaggingStop s = d.get(i);
-			if ("RS".equalsIgnoreCase(s.getType())) 
+			if ("mid_stop".equalsIgnoreCase(s.getType()))
 				data.add(s);
 		}
+
+		Log.e( "size " + d.size()  + "  :  " + data.size());
+
 		activity = a;
 		this.resources = resources;
 		tripId = SharedPreference.getTripId(a);

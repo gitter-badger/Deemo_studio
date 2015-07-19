@@ -21,6 +21,7 @@ import com.sevenre.trackre.vehicle.database.LiveDatabaseHandler;
 import com.sevenre.trackre.vehicle.datatypes.Stop;
 import com.sevenre.trackre.vehicle.listadapter.NextStopAdapter;
 import com.sevenre.trackre.vehicle.network.Server;
+import com.sevenre.trackre.vehicle.utils.Log;
 import com.sevenre.trackre.vehicle.utils.SharedPreference;
 import com.sevenre.trackre.vehicle.utils.view.CancelTripDialogBox;
 import com.sevenre.trackre.vehicle.utils.view.CompleteDialogBox;
@@ -74,6 +75,7 @@ public class FragmentTracking extends Fragment implements OnClickListener {
 
 		result = (new LiveDatabaseHandler(getActivity())).getTimeTable();
 		updateListView(result);
+		//new GetNextStop().execute();
 	}
 
 	TimerTask updateNextStopTask = new TimerTask() {
@@ -124,6 +126,7 @@ public class FragmentTracking extends Fragment implements OnClickListener {
 	}
 
 	private void updateListView(ArrayList<Stop> result) {
+		Log.e( "size of result :" + result.size()		);
 		nextStop.setAdapter(new NextStopAdapter(getActivity(), result));
 	}
 

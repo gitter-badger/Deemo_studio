@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.sevenre.trackre.vehicle.DriverApplication;
 import com.sevenre.trackre.vehicle.R;
 import com.sevenre.trackre.vehicle.database.PushDatabase;
 import com.sevenre.trackre.vehicle.network.Server;
@@ -48,6 +49,7 @@ public class ActivityLogin extends Activity implements OnClickListener {
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_login);
 		setUpUI();
+		((DriverApplication) getApplication()).getTracker(DriverApplication.TrackerName.APP_TRACKER);
 	}
 
 	private void setUpUI() {

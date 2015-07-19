@@ -20,6 +20,7 @@ import android.annotation.SuppressLint;
 import com.sevenre.trackre.vehicle.datatypes.Bus;
 import com.sevenre.trackre.vehicle.datatypes.BusPosition;
 import com.sevenre.trackre.vehicle.datatypes.ParkStop;
+import com.sevenre.trackre.vehicle.datatypes.ServerResult;
 import com.sevenre.trackre.vehicle.datatypes.Stop;
 import com.sevenre.trackre.vehicle.datatypes.TaggingStop;
 import com.sevenre.trackre.vehicle.datatypes.Trip;
@@ -35,7 +36,7 @@ import com.sevenre.trackre.vehicle.utils.Utils;
 	final static String authenticate = base_url + "authenticate/";
 	final static String authenticateCustomer = authenticate + "customer?customerNo=";
 	final static String authenticateVehicle = authenticate + "vehicle?";
-	final static String authenticateDriver = authenticate + "driverPassCode?";
+	final static String authenticateDriver = authenticate + "driver?driverPasscode=";
 	
 	final static String vehicle = base_url + "vehicle/";
 	final static String get_all_vehicle = vehicle + "getAll?schoolId=";
@@ -46,8 +47,8 @@ import com.sevenre.trackre.vehicle.utils.Utils;
 	
 	final static String daylog = base_url + "daylog/";
 	final static String starttrip = daylog + "startTrip?";
-	final static String completetrip = daylog + "cancelTrip?";
-	final static String canceltrip = daylog + "completeTrip?";
+	final static String completetrip = daylog + "completeTrip?";
+	final static String canceltrip = daylog + "cancelTrip?";
 	final static String tagstop = daylog + "tagStop?";
 	final static String tagposition = daylog + "tagPosition?";
 	
@@ -63,14 +64,15 @@ import com.sevenre.trackre.vehicle.utils.Utils;
 			ROUTE_ID = "routeId", ROUTE_DISPLAY_NAME = "routeNameDispval", TRIP_ID = "tripId",
 			TRIP_TYPE = "tripType", TRIP_NAME_DISP = "tripNameDispval", TRIP_STATUS = "tripStatus",
 			TIME = "time", ERROR = "error", TIMETABLE = "timetable", STOPTIME="stopTime";
+
 	final static String STOP_ID = "stopId", STOP_TYPE = "stopType", STOP_NO = "stopNo", SCHOOL = "school",
 			STOP_DISP_NAME = "stopNameDispval", LAT = "stopLat", LNG = "stopLng", SCHOOL_ID = "schoolId", 
 			PARKSTATIONS = "parkStations", VEHICLE = "vehicle", STARTTIME="startTime",
             ROUTE_NAME="routeName", DRIVER="driver", DRIVERID="driverId",
 			TRIPDESCRIPTION="tripDescription", STOP_NAME = "stopName", VEHICLES = "vehicles";
 	
-	//-----------------------------------------------------
-	
+
+	//----------------------------------------------------------------------------------
 	
 	public static String authenticateApp (String customerNo) {
 		String url = authenticateCustomer + customerNo;
@@ -93,55 +95,82 @@ import com.sevenre.trackre.vehicle.utils.Utils;
 		}
 		return null;
 	}
+
+    public static int verifyDriverPassCode (String code, String schoolId) {
+        String url = authenticateDriver + code + "&schoolId=" + schoolId;
+        String result = readFromUrl(url);
+        if (result==null) {
+            return -1;
+        }
+        JSONObject object;
+        try {
+            object = new JSONObject(result);
+            if(object.has(SUCCESS) && object.getBoolean(SUCCESS)) {
+                return object.getJSONObject(DATA).getJSONObject(DRIVER).getInt(DRIVERID);
+            } else
+                return -1;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
 	
-	public static boolean startTrip(Trip t, double mLat, double mLng, double mSpeed, int driverId) {	
-		// $required_params = array('tripId','tripStatus','date','time','lat','long','speed');
+	public static ServerResult startTrip(Trip t, String schoolId, String vehicleId, double mLat, double mLng, double mSpeed, String passcode) {
+		// tripId, schoolId, vehicleId, driverPasscode, date, time, lat, lng, speed
+        ServerResult serverResult = new ServerResult();
+        serverResult.setResult(false);
 		String url = starttrip + "tripId=" + t.getTripId() +
-				"&tripStatus=" + t.getTripStatus() +
+				"&schoolId=" + schoolId +
+                "&vehicleId=" + vehicleId +
+                "&driverPasscode=" + passcode +
 				"&time=" + getTime() +
 				"&date=" + getDate() +
 				"&lat=" + mLat +
 				"&lng=" +mLng +
-				"&speed=" + mSpeed +
-				"&driverId=" + driverId;
+				"&speed=" + mSpeed;
 		
 		String result = readFromUrl(url);
 		JSONObject object;
-		System.out.println(url);
-		System.out.println(result);
 		if (result==null )
-			return false;
+			return serverResult;
 		
 		try {
+
 			object = new JSONObject(result);
 			if(object.has(SUCCESS) && object.getBoolean(SUCCESS)) {
-				return true;
-			} else 
-				return false;
+				serverResult.setResult(true);
+                return serverResult;
+			} else {
+                //ToDo get error message
+                return serverResult;
+            }
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return false;
+		return serverResult;
 	}
 	
-	public static boolean completeTrip(String tripId, String status, String time, String date, String lat,
-			String lng, String speed, String activity,  int driverId, boolean isLive) {
-		//$required_params = array('tripId','tripStatus','date','time','lat','long','speed');
+	public static boolean completeTrip(String tripId, String schoolId, String passcode,
+           String time, String date, String lat, String lng, String speed, String activity, boolean isLive) {
+		//tripId, schoolId, driverPasscode, date, time, lat, lng, speed
 
 		String url = completetrip + "tripId=" + tripId +
-				"&tripStatus=" + status +
+                "&schoolId=" + schoolId +
+                "&driverPasscode=" + passcode +
 				"&time=" + time +
 				"&date=" + date +
 				"&lat=" +lat +
 				"&lng=" + lng +
 				"&speed=" + speed +
-				"&driverId=" + driverId +
 				"&isLive=" + isLive;
 		
 		String result = readFromUrl(url);
 		JSONObject object;
-		
-		if (result!=null) {
+
+		Log.e(url);
+		Log.e(result);
+
+        if (result!=null) {
 			try {
 				object = new JSONObject(result);
 				if(object.has(SUCCESS) && object.getBoolean(SUCCESS)) {
@@ -172,9 +201,6 @@ import com.sevenre.trackre.vehicle.utils.Utils;
 		String result = readFromUrl(url);
 		JSONObject object;
 
-		Log.e(url);Log.e(result);
-
-
 		if (result!=null) {
 			try {
 				object = new JSONObject(result);
@@ -190,9 +216,9 @@ import com.sevenre.trackre.vehicle.utils.Utils;
 	}
 	
 	public static boolean tagPosition(BusPosition pos, boolean isLive, int stopReached) {
-		//$required_params = array('tripId','tripStatus','date','time','lat','long','speed');
+		//tripId, date, time, lat, lng, speed, tripMode, isLive
 		String url = tagposition + "tripId=" + pos.getTripId() +
-				"&tripStatus=" + pos.getTripStatus() +
+				"&tripMode=" + pos.getTripMode() +
 				"&time=" + pos.getTime() +
 				"&date=" + pos.getDate() +
 				"&lat=" + pos.getLat() +
@@ -202,6 +228,7 @@ import com.sevenre.trackre.vehicle.utils.Utils;
 				"&e=" + (stopReached+1);
 		
 		String result = readFromUrl(url);
+		Log.e(url);
 		if(result!= null) {
 			JSONObject object;
 			try {
@@ -220,19 +247,18 @@ import com.sevenre.trackre.vehicle.utils.Utils;
 	}
 	
 	public static boolean tagStop(TaggingStop t,  boolean isLive) {
-		//$required_params = array('tripId','stopId','date','time','lat','long','speed');
+		//tripId, date, time, lat, lng, speed, stopId
 		String url = tagstop + "tripId=" + t.getTripId() +
-				"&stopNo=" + t.getId() +
 				"&stopId=" + t.getId() +
-				"&time=" + t.getTime() +
+				"&time=" + t.getServerTime() +
 				"&date=" + t.getDate() +
 				"&lat=" + t.getLat() +
 				"&lng=" + t.getLng() +
 				"&speed=" + t.getSpeed() + 
 				"&isLive=" + isLive;
 		String result = readFromUrl(url);
-		System.out.println(url);
-		System.out.println(result);
+		Log.e(url);
+        Log.e(result);
 		if (result!=null) {
 			JSONObject object;
 			try {
@@ -281,9 +307,7 @@ import com.sevenre.trackre.vehicle.utils.Utils;
 	
 	public static ArrayList<Trip> getPickUpTrip(String vechileId, String schoolId) {
 		String url = pickUp + VEHICLE_ID + "=" + vechileId + "&schoolId=" + schoolId;
-		//System.out.println(url);
 		String result = readFromUrl(url);
-		//System.out.println(result);
 
 		ArrayList<Trip> tirpList = new ArrayList<Trip>();
 		if (result == null) {
@@ -304,7 +328,6 @@ import com.sevenre.trackre.vehicle.utils.Utils;
                         name = o.getString(ROUTE_NAME);
                         time = o.getString(STARTTIME);
                         decription = o.getString(TRIPDESCRIPTION);
-                        status = o.getString(TRIP_STATUS);
 
                         if ("tag".equals(o.getString("tripMode"))) {
                             isTagged = false;
@@ -324,15 +347,14 @@ import com.sevenre.trackre.vehicle.utils.Utils;
 	}
 
 	public static ArrayList<Trip> getDropTrip(String vehicleID, String schoolId) {
-		
 		String url = drop + VEHICLE_ID +"="+ vehicleID + "&schoolId=" + schoolId;
 		String result = readFromUrl(url);
-		System.out.println(url);
-		System.out.println(result);
 		ArrayList<Trip> tirpList = new ArrayList<Trip>();
-		if (result==null) {
+
+        if (result==null) {
 			return tirpList;
 		}
+
 		JSONObject object;
 		try {
 			object = new JSONObject(result);
@@ -347,7 +369,6 @@ import com.sevenre.trackre.vehicle.utils.Utils;
                         name = o.getString(ROUTE_NAME);
                         time = o.getString(STARTTIME);
                         decription = o.getString(TRIPDESCRIPTION);
-                        status = o.getString(TRIP_STATUS);
 
                         if ("tag".equals(o.getString("tripMode"))) {
                             isTagged = false;
@@ -367,8 +388,10 @@ import com.sevenre.trackre.vehicle.utils.Utils;
 		ArrayList<Stop> stopList = new ArrayList<Stop>();
 		String url = gettimetable + tripId + "&schoolId=" + schoolId;
 		String result = readFromUrl(url);
-		Log.e("RESULT : " + result);
-		JSONObject object;
+        Log.e(url);
+        Log.e(result);
+
+        JSONObject object;
 		if (result==null) {
 			return stopList;
 		}
@@ -378,7 +401,7 @@ import com.sevenre.trackre.vehicle.utils.Utils;
 				JSONArray stops = (object.getJSONObject(DATA)).getJSONArray(TIMETABLE);
 				for (int i = 0; i < stops.length(); i++) {
 					JSONObject o = (JSONObject) stops.get(i);
-					String name = o.getString(STOP_DISP_NAME);
+					String name = o.getString(STOP_NAME);
 					String id = o.getString(STOP_ID);
 					String no = o.getString(STOP_NO);
 					String type = o.getString(STOP_TYPE);
@@ -399,7 +422,9 @@ import com.sevenre.trackre.vehicle.utils.Utils;
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
-		}
+		} catch (Exception e) {
+            e.printStackTrace();
+        }
 		return stopList ;
 	}
 
@@ -557,26 +582,7 @@ import com.sevenre.trackre.vehicle.utils.Utils;
 		}
 		return null;
 	}
-	
-	public static int verifyDriverPassCode (String code, String schoolId) {
-		String url = driverPassCode + code + "&schoolId=" + schoolId;
-		String result = readFromUrl(url);
-		if (result==null) { 
-			return -1;
-		}
-		JSONObject object;
-		try {
-			object = new JSONObject(result);
-			if(object.has(SUCCESS) && object.getBoolean(SUCCESS)) {
-				return object.getJSONObject(DATA).getJSONObject(DRIVER).getInt(DRIVERID);
-			} else 
-				return -1;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return -1;
-	}
-	
+
 	public static String getSchoolInfo (String schoolId) {
 		String url = getSchoolInfo + schoolId;
 		String result = readFromUrl(url);

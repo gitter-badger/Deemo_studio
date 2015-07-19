@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Service;
 import android.content.BroadcastReceiver;
@@ -15,6 +14,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.location.Criteria;
+import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -22,12 +22,9 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings.Secure;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.sevenre.trackre.vehicle.R;
 import com.sevenre.trackre.vehicle.database.LiveDatabaseHandler;
 import com.sevenre.trackre.vehicle.datatypes.BusPosition;
 import com.sevenre.trackre.vehicle.datatypes.Stop;
@@ -44,8 +41,8 @@ public class TrackService extends Service implements LocationListener {
 	LocationManager locationManager;
 	Location mLocation;
 	Context mContext;
-	String mBestProvider, tripId, tripStatus;
-	List<BusPosition> safeList = Collections.synchronizedList(new ArrayList<BusPosition>());
+	String mBestProvider, tripId, tripMode = "track";
+	final List<BusPosition> safeList = Collections.synchronizedList(new ArrayList<BusPosition>());
 	Timer addTimer, uploadTimer;
 	LiveDatabaseHandler db ;
 	boolean killService = false; //if service is to be stopped and push data into database
@@ -73,7 +70,7 @@ public class TrackService extends Service implements LocationListener {
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		initializeLocationParameters();
 		tripId = SharedPreference.getTripId(getApplicationContext());
-		tripStatus = SharedPreference.getTripStatus(getApplicationContext());
+		//tripStatus = SharedPreference.getTripStatus(getApplicationContext());
 		db = new LiveDatabaseHandler(this);
 		addTimer.scheduleAtFixedRate(addTask, 1000, TAG_TIME);
 		uploadTimer.scheduleAtFixedRate(uploadTask, 1000, 60202);
@@ -103,6 +100,8 @@ public class TrackService extends Service implements LocationListener {
 				for (int i = 0; i < safeList.size(); i++)
 					safeList.remove(0);
 				stopSelf();
+				locationManager.removeUpdates(TrackService.this);
+
 				onDestroy();
 			} else if (status.contains("PAUSE")) {
 				serviceStatus = false;
@@ -241,7 +240,7 @@ public class TrackService extends Service implements LocationListener {
 				Double.toString(mSpeed),
 				Server.getTime(),
 				Server.getDate(),
-				tripId, tripStatus);
+				tripId, tripMode);
 		if (!Server.tagPosition(pos,true, stopReached)) {
 			synchronized(safeList) {
 				safeList.add(pos);

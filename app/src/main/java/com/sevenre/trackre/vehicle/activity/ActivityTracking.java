@@ -105,6 +105,7 @@ public class ActivityTracking
             stops = db.getTimeTable();
             stops.remove(0);
             nextName.setText(stops.get(0).getName());
+            scheduleTime.setText(stops.get(0).getTime());
             return null;
         }
     }

@@ -113,7 +113,7 @@ public class LiveDatabaseHandler extends SQLiteOpenHelper {
 				BusPosition pos = positions.get(i);
 				ContentValues values = new ContentValues();
 			    values.put(TRIP_ID, pos.getTripId());
-			    values.put(TRIP_STATUS, pos.getTripStatus());
+			    values.put(TRIP_STATUS, pos.getTripMode());
 			    values.put(DATE, pos.getDate());
 			    values.put(TIME, pos.getTime());
 			    values.put(LAT, pos.getLat());
@@ -138,7 +138,7 @@ public class LiveDatabaseHandler extends SQLiteOpenHelper {
 			        BusPosition pos = new BusPosition();
 			        pos.setId(cursor.getString(0));
 			        pos.setTripId(cursor.getString(1));
-			        pos.setTripStatus(cursor.getString(2));
+			        pos.setTripMode(cursor.getString(2));
 			        pos.setDate(cursor.getString(3));
 			        pos.setTime(cursor.getString(4));
 			        pos.setLat(cursor.getString(5));
@@ -409,7 +409,7 @@ public class LiveDatabaseHandler extends SQLiteOpenHelper {
 			ContentValues values = new ContentValues();
 			values.put(STOP_ID, stop.getId());
 			values.put(DATE, stop.getDate());
-			values.put(TIME, stop.getTime());
+			values.put(TIME, stop.getServerTime());
 			values.put(LAT, stop.getLat());
 			values.put(LNG, stop.getLng());
 			values.put(SPEED, stop.getSpeed());

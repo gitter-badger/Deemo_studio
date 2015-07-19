@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.sevenre.trackre.vehicle.R;
 import com.sevenre.trackre.vehicle.database.LiveDatabaseHandler;
+import com.sevenre.trackre.vehicle.datatypes.ServerResult;
 import com.sevenre.trackre.vehicle.datatypes.Stop;
 import com.sevenre.trackre.vehicle.datatypes.Trip;
 import com.sevenre.trackre.vehicle.network.Server;
@@ -43,6 +44,7 @@ public class StartTripDialogBox extends Dialog implements android.view.View.OnCl
 	Location mLocation;
 	double mLat, mLng, mSpeed;
 	EditText driverPin;
+	String vehicleId, schoolId;
 	
 	public StartTripDialogBox(Context a,  Intent i,  Intent s, Trip t) {
 		super(a);
@@ -68,7 +70,11 @@ public class StartTripDialogBox extends Dialog implements android.view.View.OnCl
 		tv.setText(t.getName());
 	    tv = (TextView) findViewById(R.id.dialog_box_title);
 		tv.setText(""+t.getTime());
+		schoolId = SharedPreference.getSchoolId(mContext);
+		vehicleId = SharedPreference.getVehicleId(mContext);
 	}
+
+
 	
 	@Override
 	public void onClick(View v) {
@@ -108,18 +114,21 @@ public class StartTripDialogBox extends Dialog implements android.view.View.OnCl
 		ArrayList<Stop> stops;
 		int driverId;
 		String passcode;
+
 		@Override
 		protected Boolean doInBackground(String... params) {
 			passcode = driverPin.getText().toString();
+			ServerResult result;
 			driverId = Server.verifyDriverPassCode(
 					passcode, SharedPreference.getSchoolId(mContext));
 			if (driverId<0) {
 				return false;
 			}
-			boolean start = Server.startTrip(t, mLat, mLng, mSpeed, driverId); 
-			if (start) 
+			//startTrip(Trip t, String schoolId, String vehicleId, double mLat, double mLng, double mSpeed, int driverPasscode)
+			 result = Server.startTrip(t, schoolId, vehicleId, mLat, mLng, mSpeed, passcode);
+			if (result.isResult())
 				stops = Server.getStopList(t.getTripId(),SharedPreference.getSchoolId(mContext));
-			return start;
+			return result.isResult();
 		}
 		
 		@Override
@@ -186,7 +195,6 @@ public class StartTripDialogBox extends Dialog implements android.view.View.OnCl
 				mSpeed = mLocation.getSpeed();
 				locationManager.removeUpdates(this);
 			}
-			
 		}
 	}
 

@@ -17,10 +17,8 @@ import android.widget.Toast;
 import com.sevenre.trackre.vehicle.R;
 import com.sevenre.trackre.vehicle.network.Server;
 import com.sevenre.trackre.vehicle.utils.Constants;
-import com.sevenre.trackre.vehicle.utils.Log;
 import com.sevenre.trackre.vehicle.utils.NetworkConnectivity;
 import com.sevenre.trackre.vehicle.utils.SharedPreference;
-import com.sevenre.trackre.vehicle.utils.Utils;
 import com.sevenre.trackre.vehicle.utils.view.GenerateViews;
 
 public class ActivityAuthenticate extends Activity implements OnClickListener{
@@ -66,22 +64,19 @@ public class ActivityAuthenticate extends Activity implements OnClickListener{
 						"We are trying to verify your details, please wait for a while!");
 			dialog.show();
 			new GetSchoolId().execute(schoolID_);
-			
 		}
 	}
 	
 	class GetSchoolId extends AsyncTask<String , Integer, Boolean> {
-		
+
 		String schoolId;
 
 		@Override
 		protected Boolean doInBackground(String... params) {
 			schoolId = Server.authenticateApp(params[0]);
 			String info = Server.getSchoolInfo(schoolId);
-			System.out.println("info : " +info);
 			SharedPreference.setSchoolInfo(getApplicationContext(), info);
-			Log.e("School Id - " + schoolId);
-			if (schoolId == null) 
+			if (schoolId == null)
 				return false; 
 			else
 				return true;
@@ -91,7 +86,6 @@ public class ActivityAuthenticate extends Activity implements OnClickListener{
 		protected void onPostExecute(Boolean result) {
 			dialog.dismiss();
 			if (result) {
-				Log.e("School Id : " + schoolId);
 				SharedPreference.setSchoolId(getApplicationContext(), schoolId);
 				Constants.isAuthentic = true;
 				Intent i = new Intent(ActivityAuthenticate.this, ActivityHome.class);
@@ -99,8 +93,6 @@ public class ActivityAuthenticate extends Activity implements OnClickListener{
 			} else {
 				Toast.makeText(getApplicationContext(), "Error is your Customer No", Toast.LENGTH_LONG).show();
 			}
-			
-			
 			super.onPostExecute(result);
 		}
 	}

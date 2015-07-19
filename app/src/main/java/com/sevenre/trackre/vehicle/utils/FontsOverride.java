@@ -4,8 +4,6 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Build;
 
-import com.sevenre.trackre.vehicle.activity.Android;
-
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
