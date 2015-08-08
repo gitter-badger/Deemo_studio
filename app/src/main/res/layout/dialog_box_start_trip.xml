@@ -50,7 +50,6 @@
            android:layout_width="fill_parent"
            android:layout_height="wrap_content"
            android:layout_gravity="center"
-           android:text="1234"
            android:textSize="12sp"
            android:inputType="numberPassword"
            android:gravity="center"
@@ -62,7 +61,9 @@
            android:backgroundTint="@color/primary"
            android:fontFamily="sans-serif"
            android:letterSpacing="4"
-           tools:ignore="RtlSymmetry,UnusedAttribute"/>
+           tools:ignore="RtlSymmetry,UnusedAttribute">
+            <requestFocus/>
+       </EditText>
 
 
        <include layout="@layout/dialog_footer"

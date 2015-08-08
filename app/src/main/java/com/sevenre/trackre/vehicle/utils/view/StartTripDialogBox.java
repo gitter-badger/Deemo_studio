@@ -14,9 +14,9 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -60,6 +60,7 @@ public class StartTripDialogBox extends Dialog implements android.view.View.OnCl
 		super.onCreate(savedInstanceState);
 		initializeLocationParameters();
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 	    setContentView(R.layout.dialog_box_start_trip);
 	    yes = (Button) findViewById(R.id.dialog_box_yes);
 	    no = (Button) findViewById(R.id.dialog_box_no);
@@ -69,12 +70,10 @@ public class StartTripDialogBox extends Dialog implements android.view.View.OnCl
 		TextView tv = (TextView) findViewById(R.id.dialog_box_select_trip_text);
 		tv.setText(t.getName());
 	    tv = (TextView) findViewById(R.id.dialog_box_title);
-		tv.setText(""+t.getTime());
+		tv.setText("" + t.getTime());
 		schoolId = SharedPreference.getSchoolId(mContext);
 		vehicleId = SharedPreference.getVehicleId(mContext);
 	}
-
-
 	
 	@Override
 	public void onClick(View v) {
@@ -109,31 +108,26 @@ public class StartTripDialogBox extends Dialog implements android.view.View.OnCl
 		}
 	}
 	
-	public class StartTrip extends AsyncTask<String, Integer, Boolean> {
+	public class StartTrip extends AsyncTask<String, Integer, ServerResult> {
 
 		ArrayList<Stop> stops;
 		int driverId;
 		String passcode;
 
 		@Override
-		protected Boolean doInBackground(String... params) {
+		protected ServerResult doInBackground(String... params) {
 			passcode = driverPin.getText().toString();
 			ServerResult result;
-			driverId = Server.verifyDriverPassCode(
-					passcode, SharedPreference.getSchoolId(mContext));
-			if (driverId<0) {
-				return false;
-			}
-			//startTrip(Trip t, String schoolId, String vehicleId, double mLat, double mLng, double mSpeed, int driverPasscode)
-			 result = Server.startTrip(t, schoolId, vehicleId, mLat, mLng, mSpeed, passcode);
+			driverId = Server.verifyDriverPassCode(passcode, SharedPreference.getSchoolId(mContext));
+			result = Server.startTrip(t, schoolId, vehicleId, mLat, mLng, mSpeed, passcode);
 			if (result.isResult())
 				stops = Server.getStopList(t.getTripId(),SharedPreference.getSchoolId(mContext));
-			return result.isResult();
+			return result;
 		}
 		
 		@Override
-		protected void onPostExecute(Boolean result) {
-			if (result) {
+		protected void onPostExecute(ServerResult result) {
+			if (result.isResult()) {
 				if (stops.size()>0) {
 					LiveDatabaseHandler db = new LiveDatabaseHandler(mContext.getApplicationContext());
 					db.updateTimeTable(stops);
@@ -143,19 +137,17 @@ public class StartTripDialogBox extends Dialog implements android.view.View.OnCl
 				SharedPreference.setPassCode(mContext, Integer.parseInt(passcode));
 				SharedPreference.setDriverId(mContext, driverId);
 				mContext.startActivity(i);
-
 				mContext.startService(s);
 				if(dialog!=null)
 					if(dialog.isShowing())
 						dialog.dismiss();
 
 			} else {
-				if (driverId<0) {
-					Toast.makeText(mContext, "Unable to start trip", Toast.LENGTH_LONG).show();
-					show();
-				} else {
-					Toast.makeText(mContext, "Incorrect Pin", Toast.LENGTH_LONG).show();
-				}
+				if (result.getError()!=null && result.getError().length()>=0) {
+                    Toast.makeText(getContext(),result.getError(),Toast.LENGTH_SHORT).show();
+                } else
+                    Toast.makeText(getContext(),"Something went wrong, contact TrackRE!",Toast.LENGTH_SHORT).show();
+
 				if(dialog!=null)
 					if(dialog.isShowing())
 						dialog.cancel();

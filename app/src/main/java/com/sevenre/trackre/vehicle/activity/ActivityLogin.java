@@ -47,7 +47,7 @@ public class ActivityLogin extends Activity implements OnClickListener {
 			startActivity(i);
 		}
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.activity_login);
+		setContentView(R.layout.activity_authenticate);
 		setUpUI();
 		((DriverApplication) getApplication()).getTracker(DriverApplication.TrackerName.APP_TRACKER);
 	}

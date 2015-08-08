@@ -28,7 +28,7 @@ import com.sevenre.trackre.vehicle.utils.Constants;
 import com.sevenre.trackre.vehicle.utils.Log;
 import com.sevenre.trackre.vehicle.utils.Utils;
 
-@SuppressLint("SimpleDateFormat") public class Server {
+public class Server {
 	//http://www.trackre.net/school/ws01/driverapi/1.0/vehicle/gettrips/?schoolId=2&vehicleId=3&tripType=pickup
 
 	final static String base_url = "http://www.trackre.net/school/ws04/driver-api/1.0/index.php/";
@@ -128,8 +128,9 @@ import com.sevenre.trackre.vehicle.utils.Utils;
 				"&lat=" + mLat +
 				"&lng=" +mLng +
 				"&speed=" + mSpeed;
-		
+		Log.e(url);
 		String result = readFromUrl(url);
+		Log.e(result);
 		JSONObject object;
 		if (result==null )
 			return serverResult;
@@ -140,8 +141,8 @@ import com.sevenre.trackre.vehicle.utils.Utils;
 			if(object.has(SUCCESS) && object.getBoolean(SUCCESS)) {
 				serverResult.setResult(true);
                 return serverResult;
-			} else {
-                //ToDo get error message
+			} else if (object.has(ERROR)){
+                serverResult.setError(object.getString(ERROR));
                 return serverResult;
             }
 		} catch (Exception e) {
@@ -308,7 +309,8 @@ import com.sevenre.trackre.vehicle.utils.Utils;
 	public static ArrayList<Trip> getPickUpTrip(String vechileId, String schoolId) {
 		String url = pickUp + VEHICLE_ID + "=" + vechileId + "&schoolId=" + schoolId;
 		String result = readFromUrl(url);
-
+		Log.e(url);
+		Log.e(result);
 		ArrayList<Trip> tirpList = new ArrayList<Trip>();
 		if (result == null) {
 			return tirpList;
@@ -327,11 +329,10 @@ import com.sevenre.trackre.vehicle.utils.Utils;
                         id = o.getString(TRIP_ID);
                         name = o.getString(ROUTE_NAME);
                         time = o.getString(STARTTIME);
-                        decription = o.getString(TRIPDESCRIPTION);
-
-                        if ("tag".equals(o.getString("tripMode"))) {
-                            isTagged = false;
-                        }
+						if ("tag".equals(o.getString("tripMode"))) {
+							isTagged = false;
+						}
+                        decription = o.getString("stopList");
                     } finally {
                         tirpList.add(new Trip(id,name, time, decription, "PICKUP", status, isTagged));
                     }
@@ -354,6 +355,8 @@ import com.sevenre.trackre.vehicle.utils.Utils;
         if (result==null) {
 			return tirpList;
 		}
+		Log.e(url);
+		Log.e(result);
 
 		JSONObject object;
 		try {
@@ -368,11 +371,13 @@ import com.sevenre.trackre.vehicle.utils.Utils;
                         id = o.getString(TRIP_ID);
                         name = o.getString(ROUTE_NAME);
                         time = o.getString(STARTTIME);
-                        decription = o.getString(TRIPDESCRIPTION);
+
 
                         if ("tag".equals(o.getString("tripMode"))) {
                             isTagged = false;
                         }
+
+						decription = o.getString("stopList");
                     } finally {
                         tirpList.add(new Trip(id,name, time, decription, "DROP", status, isTagged));
                     }
